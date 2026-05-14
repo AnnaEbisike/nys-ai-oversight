@@ -1337,39 +1337,37 @@ def main():
 
         st.markdown("##### Primary Data Source")
         st.markdown(
-            "**1.** New York State Office of Information Technology Services. (2025). "
-            "*NYS AI Systems Inventory: Beginning September 2025* \\[Data set\\]. "
-            "USA Data.gov / NY Open Data. "
-            "https://catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025"
+            "New York State Office of Information Technology Services. "
+            '"NYS AI Systems Inventory: Beginning September 2025." '
+            "*NY Open Data*, USA Data.gov, Sept. 2025, "
+            "catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025."
         )
 
         st.markdown("##### Analytical Frameworks")
         st.markdown(
-            "**2.** European Parliament and Council of the European Union. (2024). "
-            "*Regulation (EU) 2024/1689: Artificial Intelligence Act.* "
-            "Official Journal of the European Union. "
+            "European Parliament and Council of the European Union. "
+            '"Regulation (EU) 2024/1689: Artificial Intelligence Act." '
+            "*Official Journal of the European Union*, 12 July 2024. "
             "The risk tier classification used in the Ethics Audit is modeled after this framework."
         )
         st.markdown(
-            "**3.** National Institute of Standards and Technology. (2023). "
-            "*Artificial Intelligence Risk Management Framework (AI RMF 1.0)* (NIST AI 100-1). "
-            "U.S. Department of Commerce. "
-            "https://doi.org/10.6028/NIST.AI.100-1"
+            "National Institute of Standards and Technology. "
+            "*Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. "
+            "NIST AI 100-1, U.S. Dept. of Commerce, Jan. 2023, "
+            "doi.org/10.6028/NIST.AI.100-1."
         )
         st.markdown(
-            "**4.** American Civil Liberties Union. (n.d.). "
-            "*Artificial Intelligence and Civil Liberties.* ACLU. "
-            "https://www.aclu.org/artificial-intelligence"
+            'American Civil Liberties Union. "Artificial Intelligence." '
+            "*ACLU*, www.aclu.org/artificial-intelligence. Accessed 14 May 2026."
         )
 
         st.markdown("##### AI Analysis Tool")
         st.markdown(
-            "**5.** Anthropic. (2024). *Claude* \\[Large language model\\]. "
-            "The live Ethics Audit and Accountability Gap analyses in this application "
-            "are generated at runtime by Claude. All AI-generated outputs reflect probabilistic "
-            "reasoning and should be independently verified before use in formal research or "
-            "policy contexts. "
-            "https://www.anthropic.com"
+            "Anthropic. *Claude*. Version claude-sonnet-4-6, Anthropic, 2024, "
+            "www.anthropic.com. "
+            "AI-generated content used in the Ethics Audit and Accountability Gap Analysis "
+            "features of this application. All outputs should be independently verified "
+            "before use in formal research or policy contexts."
         )
 
 
