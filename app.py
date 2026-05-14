@@ -5,6 +5,8 @@ A digital humanities investigation into New York State's first AI inventory.
 """
 
 import os
+import base64
+from pathlib import Path
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -278,8 +280,8 @@ div[data-testid="stDecoration"] { display: none; }
     background: transparent !important;
     color: var(--muted) !important;
     font-family: var(--mono) !important;
-    font-size: 0.65rem !important;
-    letter-spacing: 0.18em !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.15em !important;
     text-transform: uppercase !important;
     padding: 0.85rem 2rem !important;
     border: none !important;
@@ -329,14 +331,15 @@ div[data-testid="stDecoration"] { display: none; }
 }
 [data-testid="stMetricLabel"] > div {
     font-family: var(--mono) !important;
-    font-size: 0.58rem !important;
-    letter-spacing: 0.18em !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.15em !important;
     text-transform: uppercase !important;
     color: var(--muted) !important;
 }
 [data-testid="stMetricValue"] > div {
     font-family: var(--mono) !important;
-    font-size: 2rem !important;
+    font-size: 2.6rem !important;
     color: var(--text) !important;
     font-weight: 700 !important;
 }
@@ -372,18 +375,23 @@ div[data-testid="stDecoration"] { display: none; }
 /* ── Scrollbar ────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
+
+/* ── Global inline text boost ─────────────────────────────────────────── */
+.stMarkdown p { font-size: 1.05rem !important; line-height: 1.8 !important; color: #374151; }
+.stMarkdown li { font-size: 1.05rem !important; line-height: 1.8 !important; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 /* ── Custom component classes ─────────────────────────────────────────── */
 
 .section-label {
     font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    color: var(--light);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--muted);
     text-transform: uppercase;
     padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
     margin-bottom: 1.2rem;
 }
 
@@ -394,7 +402,7 @@ div[data-testid="stDecoration"] { display: none; }
     border: 1px solid #fca5a5;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
-    font-size: 0.6rem;
+    font-size: 0.78rem;
     letter-spacing: 0.08em;
     font-weight: 700;
     border-radius: 2px;
@@ -406,7 +414,7 @@ div[data-testid="stDecoration"] { display: none; }
     border: 1px solid #fb923c;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
-    font-size: 0.6rem;
+    font-size: 0.78rem;
     letter-spacing: 0.08em;
     font-weight: 700;
     border-radius: 2px;
@@ -418,7 +426,7 @@ div[data-testid="stDecoration"] { display: none; }
     border: 1px solid #fcd34d;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
-    font-size: 0.6rem;
+    font-size: 0.78rem;
     letter-spacing: 0.08em;
     font-weight: 700;
     border-radius: 2px;
@@ -430,7 +438,7 @@ div[data-testid="stDecoration"] { display: none; }
     border: 1px solid #86efac;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
-    font-size: 0.6rem;
+    font-size: 0.78rem;
     letter-spacing: 0.08em;
     font-weight: 700;
     border-radius: 2px;
@@ -441,9 +449,10 @@ div[data-testid="stDecoration"] { display: none; }
     background: #fff7ed;
     color: #d97706;
     border: 1px solid #fcd34d;
-    padding: 0.08rem 0.4rem;
+    padding: 0.1rem 0.5rem;
     font-family: var(--mono);
-    font-size: 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
     margin-left: 0.5rem;
     vertical-align: middle;
@@ -459,16 +468,17 @@ div[data-testid="stDecoration"] { display: none; }
 }
 .about-label {
     font-family: var(--mono);
-    font-size: 0.58rem;
-    color: var(--light);
-    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.65rem;
 }
 .about-text {
-    font-size: 0.87rem;
+    font-size: 1.05rem;
     color: #374151;
-    line-height: 1.75;
+    line-height: 1.8;
 }
 </style>
 """
@@ -572,6 +582,22 @@ def vendor_donut():
     return fig
 
 
+# ── IMAGE LOADER ─────────────────────────────────────────────────────────────
+
+def hero_bg() -> str:
+    """Returns CSS background for the hero. Uses hero.jpg if present, else gradient."""
+    img_path = Path(__file__).parent / "hero.jpg"
+    if img_path.exists():
+        with open(img_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode()
+        return (
+            f"background-image: linear-gradient(rgba(8,17,30,0.70), rgba(15,23,42,0.82)), "
+            f"url('data:image/jpeg;base64,{b64}'); "
+            "background-size: cover; background-position: center top;"
+        )
+    return "background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);"
+
+
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -580,37 +606,32 @@ def main():
 
     # ── HERO ──────────────────────────────────────────────────────────────────
     st.markdown(
-        """
+        f"""
         <div style="
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+            {hero_bg()}
             border-radius: 8px;
-            padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+            padding: 4.5rem 3rem 3rem 3rem;
             margin-bottom: 2.2rem;
-            border-left: 4px solid #dc2626;
+            border-left: 5px solid #dc2626;
             position: relative;
             overflow: hidden;
         ">
-            <div style="
-                position:absolute;top:0;right:0;width:40%;height:100%;
-                background: radial-gradient(ellipse at top right, rgba(59,130,246,0.15) 0%, transparent 70%);
-                pointer-events:none;
-            "></div>
-            <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.28em;
-                color:#f87171;text-transform:uppercase;margin-bottom:0.8rem">
+            <div style="font-family:'Space Mono',monospace;font-size:0.9rem;letter-spacing:0.22em;
+                color:#f87171;text-transform:uppercase;margin-bottom:1rem;font-weight:700">
                 New York State &nbsp;·&nbsp; AI Transparency Investigation &nbsp;·&nbsp; 2025
             </div>
-            <div style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.02;
-                color:#ffffff;margin-bottom:1rem;letter-spacing:-0.02em">
+            <div style="font-size:clamp(3rem,6.5vw,5.2rem);font-weight:800;line-height:1.0;
+                color:#ffffff;margin-bottom:1.2rem;letter-spacing:-0.02em">
                 NY GOV AI<br>Systems Watch
             </div>
-            <div style="font-size:0.95rem;color:#94a3b8;max-width:560px;line-height:1.75">
+            <div style="font-size:1.2rem;color:#94a3b8;max-width:600px;line-height:1.8;font-weight:400">
                 New York State published its first public AI inventory in September 2025.
                 Nineteen systems. Thirteen agencies. Across a government of 50 or more executive bodies.<br><br>
                 This tool examines what was disclosed and asks hard questions about what was not.
             </div>
-            <hr style="border:none;border-top:1px solid #1e3a5f;margin:1.8rem 0 0 0">
-            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#475569;
-                letter-spacing:0.18em;text-transform:uppercase;margin-top:0.8rem">
+            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:2rem 0 0 0">
+            <div style="font-family:'Space Mono',monospace;font-size:0.75rem;color:#475569;
+                letter-spacing:0.15em;text-transform:uppercase;margin-top:0.8rem">
                 Dataset: NYS AI Systems Inventory, Beginning September 2025 &nbsp;·&nbsp;
                 Source: USA Data.gov / NY Open Data / Office of Information Technology Services
             </div>
