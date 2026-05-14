@@ -1338,7 +1338,7 @@ def main():
         st.markdown("##### Primary Data Source")
         st.markdown(
             "New York State Office of Information Technology Services. "
-            '"NYS AI Systems Inventory: Beginning September 2025." '
+            "“NYS AI Systems Inventory: Beginning September 2025.” "
             "*NY Open Data*, USA Data.gov, Sept. 2025, "
             "catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025."
         )
@@ -1346,7 +1346,7 @@ def main():
         st.markdown("##### Analytical Frameworks")
         st.markdown(
             "European Parliament and Council of the European Union. "
-            '"Regulation (EU) 2024/1689: Artificial Intelligence Act." '
+            "“Regulation (EU) 2024/1689: Artificial Intelligence Act.” "
             "*Official Journal of the European Union*, 12 July 2024. "
             "The risk tier classification used in the Ethics Audit is modeled after this framework."
         )
@@ -1357,7 +1357,7 @@ def main():
             "doi.org/10.6028/NIST.AI.100-1."
         )
         st.markdown(
-            'American Civil Liberties Union. "Artificial Intelligence." '
+            "American Civil Liberties Union. “Artificial Intelligence.” "
             "*ACLU*, www.aclu.org/artificial-intelligence. Accessed 14 May 2026."
         )
 
@@ -1372,8 +1372,8 @@ def main():
 
         st.markdown("##### AI-Generated Image")
         st.markdown(
-            '"Hero background image generated using keywords derived from the project title '
-            '\'NY GOV AI Systems Watch.\'" *DALL-E*, OpenAI, 2026, openai.com/dall-e.'
+            "“Hero background image generated using keywords derived from the project title "
+            "‘NY GOV AI Systems Watch.’” *DALL-E*, OpenAI, 2026, openai.com/dall-e."
         )
 
 
