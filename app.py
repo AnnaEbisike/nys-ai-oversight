@@ -235,12 +235,12 @@ CUSTOM_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-    --bg:       #0a0a0a;
-    --surface:  #111111;
-    --surface2: #0d0d0d;
-    --border:   #1e1e1e;
-    --text:     #e8e8e8;
-    --muted:    #666666;
+    --bg:       #08111e;
+    --surface:  #0d1c2e;
+    --surface2: #0a1625;
+    --border:   #1a2e42;
+    --text:     #e2e8f0;
+    --muted:    #5d7a8f;
     --red:      #e63946;
     --amber:    #f4a261;
     --green:    #57cc99;
@@ -808,18 +808,18 @@ def main():
     # ── HERO ──────────────────────────────────────────────────────────────────
     st.markdown(
         """
-        <div style="padding:3.5rem 0 2rem 0; border-bottom:1px solid #1a1a1a; margin-bottom:2.2rem">
+        <div style="padding:3.5rem 0 2rem 0; border-bottom:1px solid #1a2e42; margin-bottom:2.2rem">
             <div class="hero-eyebrow">New York State · AI Transparency Investigation · 2025</div>
-            <div class="hero-title">Watching<br>the Watchers</div>
+            <div class="hero-title">NY AI<br>Systems Watch</div>
             <div class="hero-subtitle">
                 New York State published its first public AI inventory in September 2025.
                 Nineteen systems. Thirteen agencies. Across a government of 50+ executive bodies.<br><br>
-                This tool examines what was disclosed — and asks hard questions about what wasn't.
+                This tool examines what was disclosed and asks hard questions about what was not.
             </div>
             <hr class="hero-rule">
             <div class="hero-source">
                 Dataset: NYS AI Systems Inventory, Beginning September 2025 &nbsp;·&nbsp;
-                Source: NY Open Data / Office of Information Technology Services
+                Source: USA Data.gov / NY Open Data / Office of Information Technology Services
             </div>
         </div>
         """,
@@ -1273,65 +1273,226 @@ def main():
     with tab4:
         st.markdown('<div class="section-label">About This Project</div>', unsafe_allow_html=True)
 
-        col_a, col_b = st.columns([3, 2], gap="large")
-
-        with col_a:
+        # ── What This Is ────────────────────────────────────────────────────
+        with st.expander("What is NY AI Systems Watch?", expanded=True):
             st.markdown(
                 """
-                <div class="about-card">
-                    <div class="about-label">The Dataset</div>
-                    <div class="about-text">
-                        The NYS AI Systems Inventory (Beginning September 2025) is New York State's
-                        first public disclosure of AI systems used by executive agencies that
-                        "directly impact the public." It was published by the Office of Information
-                        Technology Services (ITS) Chief AI Office and is updated annually.<br><br>
-                        The inventory is self-reported by agencies. Back-office and internal AI tools
-                        are explicitly excluded from scope. The dataset's own documentation warns that
-                        it "may not capture pilot projects not yet disclosed, systems retired after
-                        reporting, or private vendor changes between inventory cycles."
-                    </div>
+                <div class="about-text">
+                NY AI Systems Watch is a public accountability tool built to help citizens,
+                researchers, journalists, and policymakers understand how artificial intelligence
+                is being deployed across New York State government agencies.<br><br>
+                The tool presents, analyzes, and critiques the NYS AI Systems Inventory, the first
+                public disclosure of government AI use in New York State history, published in
+                September 2025. It uses AI to analyze AI: each disclosed system is evaluated
+                through a civil liberties and public accountability lens, generating risk scores,
+                identifying affected populations, and surfacing the questions that government
+                agencies have not yet answered publicly.
                 </div>
-                <div class="about-card">
-                    <div class="about-label">Methodology</div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        # ── What It Achieves ────────────────────────────────────────────────
+        with st.expander("What this tool achieves"):
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown(
+                    """
                     <div class="about-text">
-                        This tool uses Claude Opus (Anthropic) to analyze each AI system against
-                        civil liberties and public accountability frameworks, including the EU AI Act
-                        risk tiers, the NIST AI Risk Management Framework, and ACLU AI principles.<br><br>
-                        The gap analysis draws on Claude's knowledge of government AI deployments
-                        nationally to identify likely undisclosed uses. All AI analysis is generated
-                        at runtime and may contain errors or omissions. The goal is to surface
-                        questions and frame accountability discussions — not to make definitive
-                        legal or policy conclusions.
+                    <strong style="color:#e2e8f0">Transparency</strong><br>
+                    Converts a raw government dataset into a readable, searchable, and
+                    visual interface that any member of the public can use without technical
+                    knowledge.<br><br>
+                    <strong style="color:#e2e8f0">Accountability</strong><br>
+                    Uses AI analysis to identify surveillance systems, automated decision tools,
+                    biometric technologies, and other high-risk deployments that may affect
+                    civil liberties without adequate public oversight.
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            with col2:
+                st.markdown(
+                    """
+                    <div class="about-text">
+                    <strong style="color:#e2e8f0">Gap Analysis</strong><br>
+                    Identifies what is missing from the official inventory. With only 13 of
+                    50+ New York State agencies reporting, this tool asks: what AI systems
+                    are being used that have not been disclosed?<br><br>
+                    <strong style="color:#e2e8f0">Public Education</strong><br>
+                    Contextualizes government AI use within broader national and international
+                    frameworks, helping citizens understand what responsible AI governance
+                    looks like and where New York State falls short.
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        # ── Data Source ─────────────────────────────────────────────────────
+        with st.expander("Data source"):
+            st.markdown(
+                """
+                <div class="about-text">
+                The data powering this tool comes from the official USA Data.gov catalog.<br><br>
+                <strong style="color:#e2e8f0">Dataset:</strong> NYS AI Systems Inventory: Beginning September 2025<br>
+                <strong style="color:#e2e8f0">Publisher:</strong> New York State Office of Information Technology Services (ITS), Chief AI Office<br>
+                <strong style="color:#e2e8f0">Published:</strong> September 2025<br>
+                <strong style="color:#e2e8f0">Update frequency:</strong> Annually<br>
+                <strong style="color:#e2e8f0">Coverage:</strong> All NYS executive agencies reporting AI systems with direct public impact<br>
+                <strong style="color:#e2e8f0">Source URL:</strong>
+                <a href="https://catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025"
+                   style="color:var(--blue);word-break:break-all"
+                   target="_blank">
+                   catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025
+                </a><br><br>
+                <span style="color:var(--muted);font-size:0.8rem">
+                Note: The dataset is self-reported by agencies and may not capture pilot projects,
+                retired systems, or back-office AI tools. Descriptions are agency-provided and
+                have not been independently verified for technical accuracy.
+                </span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        # ── Data at a Glance ────────────────────────────────────────────────
+        with st.expander("The data at a glance"):
+            st.markdown('<div class="section-label" style="margin-top:0.5rem">Capability Breakdown</div>', unsafe_allow_html=True)
+            st.plotly_chart(capability_chart(), use_container_width=True, config={"displayModeBar": False})
+
+            col_v1, col_v2, col_v3, col_v4 = st.columns(4)
+            flagged_count = sum(1 for s in INVENTORY if s.get("flag"))
+            with col_v1:
+                st.markdown(
+                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);padding:1rem">'
+                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">Systems Disclosed</div>'
+                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:#fff">19</div></div>',
+                    unsafe_allow_html=True,
+                )
+            with col_v2:
+                st.markdown(
+                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:1rem">'
+                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">Agencies Reporting</div>'
+                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:#fff">13</div></div>',
+                    unsafe_allow_html=True,
+                )
+            with col_v3:
+                st.markdown(
+                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);padding:1rem">'
+                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">High-Attention Flags</div>'
+                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--amber)">{flagged_count}</div></div>',
+                    unsafe_allow_html=True,
+                )
+            with col_v4:
+                st.markdown(
+                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);padding:1rem">'
+                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">Agencies Silent</div>'
+                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--red)">37+</div></div>',
+                    unsafe_allow_html=True,
+                )
+
+            st.markdown(
+                """
+                <div style="background:var(--surface);border:1px solid var(--border);
+                    border-left:3px solid var(--amber);padding:1rem 1.2rem;margin-top:1rem">
+                    <div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);
+                        letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem">
+                        Notable Absences from the Inventory
+                    </div>
+                    <div style="font-size:0.84rem;color:#aaa;line-height:1.75">
+                        0 agencies from criminal justice (State Police, Corrections, Parole)<br>
+                        0 predictive policing or recidivism scoring tools disclosed<br>
+                        0 benefits-screening or fraud-detection AI disclosed (OTDA, OMIG excluded)<br>
+                        0 child welfare or family services AI disclosed (OCFS)
                     </div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-        with col_b:
+        # ── Methodology ─────────────────────────────────────────────────────
+        with st.expander("Methodology"):
             st.markdown(
                 """
-                <div class="about-card">
-                    <div class="about-label">Key Numbers</div>
-                    <div class="about-text">
-                        <span style="color:#fff;font-weight:600">19</span> AI systems disclosed<br>
-                        <span style="color:#fff;font-weight:600">13</span> of 50+ agencies reporting<br>
-                        <span style="color:#fff;font-weight:600">7</span> systems with surveillance or biometric flags<br>
-                        <span style="color:#fff;font-weight:600">4</span> systems with automated decision components<br>
-                        <span style="color:var(--amber);font-weight:600">0</span> agencies from criminal justice<br>
-                        <span style="color:var(--amber);font-weight:600">0</span> predictive policing or benefits-scoring tools disclosed
-                    </div>
+                <div class="about-text">
+                NY AI Systems Watch uses Claude (Anthropic) to perform two types of analysis.<br><br>
+                <strong style="color:#e2e8f0">Ethics Audit</strong> evaluates each AI system against established civil liberties
+                and accountability frameworks, including the EU AI Act risk tier classification,
+                the NIST AI Risk Management Framework, and principles developed by the ACLU for
+                evaluating government AI. Each system receives a risk score, an affected populations
+                assessment, and a list of accountability questions the agency has not publicly answered.<br><br>
+                <strong style="color:#e2e8f0">Accountability Gap Analysis</strong> compares the disclosed inventory against
+                Claude's knowledge of AI systems commonly deployed in government contexts nationally.
+                It identifies agencies likely using public-facing AI that did not report, categories
+                of AI conspicuously absent from the inventory, and structural weaknesses in how the
+                inventory was designed.<br><br>
+                <span style="color:var(--muted);font-size:0.82rem">
+                All AI-generated analysis is produced at runtime and may contain inaccuracies.
+                The purpose is to surface accountability questions, not to render legal or
+                policy conclusions. Users should verify findings independently before citing them.
+                </span>
                 </div>
-                <div class="about-card">
-                    <div class="about-label">Further Reading</div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        # ── About the Researcher ────────────────────────────────────────────
+        with st.expander("About the researcher"):
+            col_bio, col_goals = st.columns([2, 1], gap="large")
+            with col_bio:
+                st.markdown(
+                    """
                     <div class="about-text">
-                        · AI Now Institute — Annual AI Index<br>
-                        · ACLU — AI and Civil Liberties<br>
-                        · The Markup — Government AI Coverage<br>
-                        · Electronic Frontier Foundation<br>
-                        · NYS Executive Order on AI (2023)<br>
-                        · EU AI Act — Risk Classification Framework
+                    <strong style="color:#e2e8f0;font-size:1rem">Anna Ebisike</strong><br>
+                    <span style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);
+                        letter-spacing:0.1em;text-transform:uppercase">
+                        Digital Humanities Researcher
+                    </span><br><br>
+                    NY AI Systems Watch was developed by Anna Ebisike as a final project in a
+                    Digital Humanities course focused on coding with AI. Anna's work sits at
+                    the intersection of technology, public policy, and civic accountability,
+                    exploring how AI tools can be used to make government more transparent
+                    and understandable to everyday people.<br><br>
+                    This project grew out of a simple question: if the government is using AI
+                    to make decisions that affect New Yorkers, what does the public actually
+                    know about it? The answer, as this inventory reveals, is: very little.
                     </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            with col_goals:
+                st.markdown(
+                    """
+                    <div style="background:var(--surface);border:1px solid var(--border);
+                        border-left:3px solid var(--blue);padding:1rem 1.2rem">
+                        <div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);
+                            letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem">
+                            Project Goals
+                        </div>
+                        <div style="font-size:0.82rem;color:#aaa;line-height:1.8">
+                            Make government AI visible<br>
+                            Surface accountability gaps<br>
+                            Ask questions agencies avoid<br>
+                            Connect data to civil rights<br>
+                            Build tools for civic education
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        # ── Further Reading ──────────────────────────────────────────────────
+        with st.expander("Further reading"):
+            st.markdown(
+                """
+                <div class="about-text">
+                AI Now Institute — Annual AI Index Report<br>
+                ACLU — AI and Civil Liberties Resource Center<br>
+                The Markup — Government AI Coverage<br>
+                Electronic Frontier Foundation — Surveillance Self-Defense<br>
+                NYS Executive Order on AI (2023)<br>
+                EU AI Act — Risk Classification Framework<br>
+                NIST AI Risk Management Framework
                 </div>
                 """,
                 unsafe_allow_html=True,

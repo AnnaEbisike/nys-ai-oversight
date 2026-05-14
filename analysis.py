@@ -5,9 +5,10 @@ for the NYS AI Systems Inventory.
 """
 
 import json
+import re
 from anthropic import Anthropic
 
-MODEL = "claude-opus-4-7"
+MODEL = "claude-sonnet-4-6"
 
 SYSTEM_PROMPT = """\
 You are an expert in AI ethics, civil liberties, and government technology accountability.
@@ -23,12 +24,16 @@ Always respond with valid JSON only. No markdown fences, no commentary outside t
 
 def _parse_json(raw: str) -> dict:
     raw = raw.strip()
-    if raw.startswith("```"):
-        parts = raw.split("```")
-        raw = parts[1]
-        if raw.startswith("json"):
-            raw = raw[4:]
-    return json.loads(raw.strip())
+    # Strip markdown fences if present
+    if "```" in raw:
+        match = re.search(r"```(?:json)?\s*([\s\S]*?)```", raw)
+        if match:
+            raw = match.group(1).strip()
+    # Extract the outermost JSON object in case there is surrounding text
+    match = re.search(r"\{[\s\S]*\}", raw)
+    if match:
+        raw = match.group(0)
+    return json.loads(raw)
 
 
 def analyze_system(client: Anthropic, system: dict) -> dict:
@@ -129,7 +134,7 @@ Include at least 6 missing agencies and at least 5 missing AI categories."""
 
     response = client.messages.create(
         model=MODEL,
-        max_tokens=3000,
+        max_tokens=4096,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": prompt}],
     )
