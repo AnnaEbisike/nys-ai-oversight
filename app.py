@@ -585,9 +585,14 @@ def vendor_donut():
 # ── IMAGE LOADER ─────────────────────────────────────────────────────────────
 
 def hero_bg() -> str:
-    """Returns CSS background for the hero. Uses hero.jpg if present, else gradient."""
-    img_path = Path(__file__).parent / "hero.jpg"
-    if img_path.exists():
+    """Returns CSS background for the hero. Uses first found image, else gradient."""
+    for name in ("hero.jpg", "hero.jpg.png", "hero.png", "hero.jpeg"):
+        img_path = Path(__file__).parent / name
+        if img_path.exists():
+            break
+    else:
+        img_path = None
+    if img_path and img_path.exists():
         with open(img_path, "rb") as f:
             b64 = base64.b64encode(f.read()).decode()
         return (
