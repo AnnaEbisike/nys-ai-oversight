@@ -1334,73 +1334,42 @@ def main():
             '<div class="section-label" style="margin-top:2.5rem">Citations and References</div>',
             unsafe_allow_html=True,
         )
+
+        st.markdown("##### Primary Data Source")
         st.markdown(
-            """
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #0284c7;
-                padding:1.5rem 1.8rem;border-radius:4px">
-                <div style="font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;
-                    color:#64748b;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.2rem">
-                    Primary Data Source
-                </div>
-                <div style="font-size:1.0rem;color:#1e293b;line-height:1.9;margin-bottom:1.5rem">
-                    <strong>1.</strong> New York State Office of Information Technology Services. (2025).
-                    <em>NYS AI Systems Inventory: Beginning September 2025</em> [Data set].
-                    USA Data.gov / NY Open Data.<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025"
-                       style="color:#0284c7;word-break:break-all" target="_blank">
-                       catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025
-                    </a>
-                </div>
+            "**1.** New York State Office of Information Technology Services. (2025). "
+            "*NYS AI Systems Inventory: Beginning September 2025* \\[Data set\\]. "
+            "USA Data.gov / NY Open Data. "
+            "https://catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025"
+        )
 
-                <div style="font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;
-                    color:#64748b;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.2rem">
-                    Analytical Frameworks
-                </div>
-                <div style="font-size:1.0rem;color:#1e293b;line-height:1.9;margin-bottom:1.5rem">
-                    <strong>2.</strong> European Parliament and Council of the European Union. (2024).
-                    <em>Regulation (EU) 2024/1689: Artificial Intelligence Act.</em>
-                    Official Journal of the European Union.
-                    The risk tier classification (Unacceptable, High, Limited, Minimal) informed
-                    the risk scoring framework used in the Ethics Audit.<br><br>
+        st.markdown("##### Analytical Frameworks")
+        st.markdown(
+            "**2.** European Parliament and Council of the European Union. (2024). "
+            "*Regulation (EU) 2024/1689: Artificial Intelligence Act.* "
+            "Official Journal of the European Union. "
+            "The risk tier classification used in the Ethics Audit is modeled after this framework."
+        )
+        st.markdown(
+            "**3.** National Institute of Standards and Technology. (2023). "
+            "*Artificial Intelligence Risk Management Framework (AI RMF 1.0)* (NIST AI 100-1). "
+            "U.S. Department of Commerce. "
+            "https://doi.org/10.6028/NIST.AI.100-1"
+        )
+        st.markdown(
+            "**4.** American Civil Liberties Union. (n.d.). "
+            "*Artificial Intelligence and Civil Liberties.* ACLU. "
+            "https://www.aclu.org/artificial-intelligence"
+        )
 
-                    <strong>3.</strong> National Institute of Standards and Technology. (2023).
-                    <em>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</em>
-                    (NIST AI 100-1). U.S. Department of Commerce.<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://doi.org/10.6028/NIST.AI.100-1"
-                       style="color:#0284c7" target="_blank">
-                       doi.org/10.6028/NIST.AI.100-1
-                    </a><br><br>
-
-                    <strong>4.</strong> American Civil Liberties Union. (n.d.).
-                    <em>Artificial Intelligence and Civil Liberties.</em> ACLU.<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://www.aclu.org/artificial-intelligence"
-                       style="color:#0284c7" target="_blank">
-                       aclu.org/artificial-intelligence
-                    </a>
-                </div>
-
-                <div style="font-family:'Space Mono',monospace;font-size:0.78rem;font-weight:700;
-                    color:#64748b;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.2rem">
-                    AI Analysis Tool
-                </div>
-                <div style="font-size:1.0rem;color:#1e293b;line-height:1.9;margin-bottom:0.5rem">
-                    <strong>5.</strong> Anthropic. (2024). <em>Claude</em> [Large language model].
-                    The live Ethics Audit and Accountability Gap analyses in this application
-                    are generated at runtime by Claude. All AI-generated analysis reflects
-                    probabilistic reasoning and should be independently verified before use
-                    in formal research or policy contexts.<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://www.anthropic.com"
-                       style="color:#0284c7" target="_blank">
-                       anthropic.com
-                    </a>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        st.markdown("##### AI Analysis Tool")
+        st.markdown(
+            "**5.** Anthropic. (2024). *Claude* \\[Large language model\\]. "
+            "The live Ethics Audit and Accountability Gap analyses in this application "
+            "are generated at runtime by Claude. All AI-generated outputs reflect probabilistic "
+            "reasoning and should be independently verified before use in formal research or "
+            "policy contexts. "
+            "https://www.anthropic.com"
         )
 
 
