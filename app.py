@@ -596,7 +596,7 @@ def hero_bg() -> str:
         with open(img_path, "rb") as f:
             b64 = base64.b64encode(f.read()).decode()
         return (
-            f"background-image: linear-gradient(rgba(8,17,30,0.70), rgba(15,23,42,0.82)), "
+            f"background-image: linear-gradient(rgba(8,17,30,0.82), rgba(15,23,42,0.90)), "
             f"url('data:image/jpeg;base64,{b64}'); "
             "background-size: cover; background-position: center top;"
         )
@@ -622,21 +622,25 @@ def main():
             overflow: hidden;
         ">
             <div style="font-family:'Space Mono',monospace;font-size:0.9rem;letter-spacing:0.22em;
-                color:#f87171;text-transform:uppercase;margin-bottom:1rem;font-weight:700">
+                color:#fca5a5;text-transform:uppercase;margin-bottom:1rem;font-weight:700;
+                text-shadow:0 1px 4px rgba(0,0,0,0.9)">
                 New York State &nbsp;·&nbsp; AI Transparency Investigation &nbsp;·&nbsp; 2025
             </div>
             <div style="font-size:clamp(3rem,6.5vw,5.2rem);font-weight:800;line-height:1.0;
-                color:#ffffff;margin-bottom:1.2rem;letter-spacing:-0.02em">
+                color:#ffffff;margin-bottom:1.2rem;letter-spacing:-0.02em;
+                text-shadow:0 2px 8px rgba(0,0,0,0.95)">
                 NY GOV AI<br>Systems Watch
             </div>
-            <div style="font-size:1.2rem;color:#94a3b8;max-width:600px;line-height:1.8;font-weight:400">
+            <div style="font-size:1.2rem;color:#f1f5f9;max-width:600px;line-height:1.8;font-weight:500;
+                text-shadow:0 1px 6px rgba(0,0,0,0.95)">
                 New York State published its first public AI inventory in September 2025.
                 Nineteen systems. Thirteen agencies. Across a government of 50 or more executive bodies.<br><br>
                 This tool examines what was disclosed and asks hard questions about what was not.
             </div>
-            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:2rem 0 0 0">
-            <div style="font-family:'Space Mono',monospace;font-size:0.75rem;color:#475569;
-                letter-spacing:0.15em;text-transform:uppercase;margin-top:0.8rem">
+            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.15);margin:2rem 0 0 0">
+            <div style="font-family:'Space Mono',monospace;font-size:0.75rem;color:#cbd5e1;
+                letter-spacing:0.15em;text-transform:uppercase;margin-top:0.8rem;
+                text-shadow:0 1px 4px rgba(0,0,0,0.9)">
                 Dataset: NYS AI Systems Inventory, Beginning September 2025 &nbsp;·&nbsp;
                 Source: USA Data.gov / NY Open Data / Office of Information Technology Services
             </div>
