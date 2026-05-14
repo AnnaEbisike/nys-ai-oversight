@@ -1370,6 +1370,12 @@ def main():
             "before use in formal research or policy contexts."
         )
 
+        st.markdown("##### AI-Generated Image")
+        st.markdown(
+            '"Hero background image generated using keywords derived from the project title '
+            '\'NY GOV AI Systems Watch.\'" *DALL-E*, OpenAI, 2026, openai.com/dall-e.'
+        )
+
 
 if __name__ == "__main__":
     main()
