@@ -23,7 +23,7 @@ st.set_page_config(
     page_title="NY AI Systems Watch",
     page_icon="🔎",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # ── INVENTORY DATA ────────────────────────────────────────────────────────────
@@ -577,36 +577,6 @@ def vendor_donut():
 def main():
     st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-    # ── SIDEBAR ───────────────────────────────────────────────────────────────
-    with st.sidebar:
-        st.markdown(
-            '<p style="font-family:\'Space Mono\',monospace;font-size:0.58rem;'
-            'color:#94a3b8;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem">'
-            "Anthropic API Key</p>",
-            unsafe_allow_html=True,
-        )
-        api_input = st.text_input(
-            "", type="password", placeholder="sk-ant-...", label_visibility="collapsed"
-        )
-        if api_input:
-            os.environ["ANTHROPIC_API_KEY"] = api_input
-            st.markdown(
-                '<p style="font-family:\'Space Mono\',monospace;font-size:0.6rem;'
-                'color:#059669;margin-top:0.3rem">Key loaded</p>',
-                unsafe_allow_html=True,
-            )
-        else:
-            st.markdown(
-                '<p style="font-family:\'Space Mono\',monospace;font-size:0.6rem;'
-                'color:#94a3b8;margin-top:0.3rem">No key — analyses disabled</p>',
-                unsafe_allow_html=True,
-            )
-        st.markdown(
-            '<hr style="border:none;border-top:1px solid #e2e8f0;margin:1.2rem 0">'
-            '<p style="font-family:\'Space Mono\',monospace;font-size:0.55rem;'
-            'color:#cbd5e1;line-height:1.7">Get a key at<br>console.anthropic.com</p>',
-            unsafe_allow_html=True,
-        )
 
     # ── HERO ──────────────────────────────────────────────────────────────────
     st.markdown(
