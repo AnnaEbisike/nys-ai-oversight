@@ -20,7 +20,7 @@ from analysis import analyze_system, analyze_gaps
 # ── PAGE CONFIG ───────────────────────────────────────────────────────────────
 
 st.set_page_config(
-    page_title="NY AI Systems Watch",
+    page_title="NY GOV AI Systems Watch",
     page_icon="🔎",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -581,22 +581,35 @@ def main():
     # ── HERO ──────────────────────────────────────────────────────────────────
     st.markdown(
         """
-        <div style="padding:3.5rem 0 2rem 0;border-bottom:1px solid #e2e8f0;margin-bottom:2.2rem">
+        <div style="
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+            border-radius: 8px;
+            padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+            margin-bottom: 2.2rem;
+            border-left: 4px solid #dc2626;
+            position: relative;
+            overflow: hidden;
+        ">
+            <div style="
+                position:absolute;top:0;right:0;width:40%;height:100%;
+                background: radial-gradient(ellipse at top right, rgba(59,130,246,0.15) 0%, transparent 70%);
+                pointer-events:none;
+            "></div>
             <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.28em;
-                color:#dc2626;text-transform:uppercase;margin-bottom:0.8rem">
+                color:#f87171;text-transform:uppercase;margin-bottom:0.8rem">
                 New York State &nbsp;·&nbsp; AI Transparency Investigation &nbsp;·&nbsp; 2025
             </div>
             <div style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.02;
-                color:#0f172a;margin-bottom:1rem;letter-spacing:-0.02em">
-                NY AI<br>Systems Watch
+                color:#ffffff;margin-bottom:1rem;letter-spacing:-0.02em">
+                NY GOV AI<br>Systems Watch
             </div>
-            <div style="font-size:0.95rem;color:#64748b;max-width:560px;line-height:1.75">
+            <div style="font-size:0.95rem;color:#94a3b8;max-width:560px;line-height:1.75">
                 New York State published its first public AI inventory in September 2025.
                 Nineteen systems. Thirteen agencies. Across a government of 50 or more executive bodies.<br><br>
                 This tool examines what was disclosed and asks hard questions about what was not.
             </div>
-            <hr style="border:none;border-top:1px solid #e2e8f0;margin:1.8rem 0 0 0">
-            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#cbd5e1;
+            <hr style="border:none;border-top:1px solid #1e3a5f;margin:1.8rem 0 0 0">
+            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#475569;
                 letter-spacing:0.18em;text-transform:uppercase;margin-top:0.8rem">
                 Dataset: NYS AI Systems Inventory, Beginning September 2025 &nbsp;·&nbsp;
                 Source: USA Data.gov / NY Open Data / Office of Information Technology Services
@@ -620,14 +633,14 @@ def main():
     st.markdown("<div style='height:2rem'></div>", unsafe_allow_html=True)
 
     # ── TABS ──────────────────────────────────────────────────────────────────
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["The Inventory", "Ethics Audit", "Accountability Gap", "About"]
+    tab_about, tab_inventory, tab_ethics, tab_gap = st.tabs(
+        ["About", "The Inventory", "Ethics Audit", "Accountability Gap"]
     )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 1: THE INVENTORY
+    # TAB: THE INVENTORY
     # ─────────────────────────────────────────────────────────────────────────
-    with tab1:
+    with tab_inventory:
         st.markdown('<div class="section-label">All 19 Disclosed Systems</div>', unsafe_allow_html=True)
 
         col_list, col_charts = st.columns([3, 2], gap="large")
@@ -697,9 +710,9 @@ def main():
             )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 2: ETHICS AUDIT
+    # TAB: ETHICS AUDIT
     # ─────────────────────────────────────────────────────────────────────────
-    with tab2:
+    with tab_ethics:
         st.markdown('<div class="section-label">Live Ethics Analysis - Powered by Claude</div>', unsafe_allow_html=True)
         st.markdown(
             '<p style="font-size:0.84rem;color:#64748b;line-height:1.75;margin-bottom:1.5rem">'
@@ -943,9 +956,9 @@ def main():
             )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 3: ACCOUNTABILITY GAP
+    # TAB: ACCOUNTABILITY GAP
     # ─────────────────────────────────────────────────────────────────────────
-    with tab3:
+    with tab_gap:
         st.markdown('<div class="section-label">What\'s Missing From the Inventory</div>', unsafe_allow_html=True)
         st.markdown(
             '<p style="font-size:0.84rem;color:#64748b;line-height:1.75;margin-bottom:1.5rem">'
@@ -1139,9 +1152,9 @@ def main():
             )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 4: ABOUT
+    # TAB: ABOUT
     # ─────────────────────────────────────────────────────────────────────────
-    with tab4:
+    with tab_about:
         st.markdown('<div class="section-label">About This Project</div>', unsafe_allow_html=True)
 
         col_a, col_b = st.columns([3, 2], gap="large")
