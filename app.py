@@ -1,6 +1,6 @@
 """
 app.py
-Watching the Watchers: NYS AI Ethics Audit & Accountability Gap Analysis
+NY AI Systems Watch: Ethics Audit and Accountability Gap Analysis
 A digital humanities investigation into New York State's first AI inventory.
 """
 
@@ -20,8 +20,8 @@ from analysis import analyze_system, analyze_gaps
 # ── PAGE CONFIG ───────────────────────────────────────────────────────────────
 
 st.set_page_config(
-    page_title="Watching the Watchers | NYS AI Oversight",
-    page_icon="⚠",
+    page_title="NY AI Systems Watch",
+    page_icon="🔎",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -53,7 +53,7 @@ INVENTORY = [
         "vendor": "Lytx",
         "product": "Machine Vision Plus",
         "capability": "Transportation / Surveillance",
-        "purpose": "Advanced video telematics with machine vision and AI (MV+AI) to detect risky and distracted driving behavior inside and outside vehicles operated by or for OPWDD.",
+        "purpose": "Advanced video telematics with machine vision and AI to detect risky and distracted driving behavior inside and outside vehicles operated by or for OPWDD.",
         "flag": "surveillance",
     },
     {
@@ -71,7 +71,7 @@ INVENTORY = [
         "vendor": "Balto-Genysis",
         "product": "Balto",
         "capability": "Customer Service / Conversational AI",
-        "purpose": "Real-time AI guidance platform for customer service associates at contractor Performant. Records and analyzes conversations for coaching. De-identifies PII before storage using numeric and name-dictionary matching. All de-identification occurs in memory.",
+        "purpose": "Real-time AI guidance platform for customer service associates at contractor Performant. Records and analyzes conversations for coaching. De-identifies PII before storage using numeric and name-dictionary matching.",
         "flag": "recording",
     },
     {
@@ -80,14 +80,14 @@ INVENTORY = [
         "vendor": "Microsoft",
         "product": "Copilot",
         "capability": "Natural Language Understanding",
-        "purpose": "Speech/text recognition for Microsoft Teams calls used by contractor Performant. Transcripts used for recordkeeping and note-taking. Also used for summarizing documents, drafting emails, and searching data within Microsoft 365.",
+        "purpose": "Speech and text recognition for Microsoft Teams calls used by contractor Performant. Transcripts used for recordkeeping and note-taking. Also used for summarizing documents, drafting emails, and searching data within Microsoft 365.",
         "flag": None,
     },
     {
         "id": 7,
         "agency": "Office of Medicaid Inspector General",
         "vendor": "Healthcare Management Solutions, LLC (HMS)",
-        "product": "MAVS — Maestro Automated Valuation System",
+        "product": "MAVS - Maestro Automated Valuation System",
         "capability": "Automation / Predictive Scoring",
         "purpose": "Automates caseworker tasks using bagged and boosted tree ML models. Valuates Medicaid claims to determine accident-relatedness. Trained on previous caseworker evaluations. The agency states it does not make autonomous medical decisions about individual eligibility.",
         "flag": "automated_decision",
@@ -107,7 +107,7 @@ INVENTORY = [
         "vendor": "Cubic",
         "product": "GS3 Processor (GRIDSMART)",
         "capability": "Image Recognition / Computer Vision",
-        "purpose": "360-degree camera system detecting and classifying vehicles to adjust traffic signal cycle lengths statewide. All timing decisions are made by the 2070 traffic controller, not the AI. Not co-deployed with Miovision units.",
+        "purpose": "360-degree camera system detecting and classifying vehicles to adjust traffic signal cycle lengths statewide. All timing decisions are made by the traffic controller, not the AI system.",
         "flag": None,
     },
     {
@@ -116,7 +116,7 @@ INVENTORY = [
         "vendor": "Miovision",
         "product": "Miovision Core",
         "capability": "Image Recognition / Computer Vision",
-        "purpose": "Video stream analysis classifying objects as Cars vs. Heavy Trucks and Bicycles vs. Pedestrians. Interfaces with 2070 traffic controllers statewide. All intersection timing decisions made at the controller level.",
+        "purpose": "Video stream analysis classifying objects as Cars vs. Heavy Trucks and Bicycles vs. Pedestrians. Interfaces with traffic controllers statewide. All intersection timing decisions made at the controller level.",
         "flag": None,
     },
     {
@@ -125,7 +125,7 @@ INVENTORY = [
         "vendor": "Iteris",
         "product": "VantageNext",
         "capability": "Image Recognition / Computer Vision",
-        "purpose": "Combined radar and video system using CNN-based machine learning to detect vehicles and adjust traffic signal timing statewide. Uses logical OR between radar and video sensors.",
+        "purpose": "Combined radar and video system using CNN-based machine learning to detect vehicles and adjust traffic signal timing statewide.",
         "flag": None,
     },
     {
@@ -143,7 +143,7 @@ INVENTORY = [
         "vendor": "Google",
         "product": "DocumentAI",
         "capability": "Document AI / IDP",
-        "purpose": "Document quality checks, classification, extraction, and validation for online DMV transactions. Pre-fills form fields from uploaded identity documents. Checks for expiration and format compliance to reduce failed in-office visits.",
+        "purpose": "Document quality checks, classification, extraction, and validation for online DMV transactions. Pre-fills form fields from uploaded identity documents. Checks for expiration and format compliance.",
         "flag": "identity_document",
     },
     {
@@ -188,7 +188,7 @@ INVENTORY = [
         "vendor": "LinkedIn Corporation",
         "product": "LinkedIn",
         "capability": "Algorithmic Hiring / Personalization",
-        "purpose": "Provides personalized job recommendations and matches applicant skills from LinkedIn profiles and resumes to government job postings. Used in state hiring processes to recommend user matches for open positions.",
+        "purpose": "Provides personalized job recommendations and matches applicant skills from LinkedIn profiles and resumes to government job postings. Used in state hiring processes.",
         "flag": "algorithmic_decision",
     },
     {
@@ -203,48 +203,49 @@ INVENTORY = [
 ]
 
 FLAG_LABELS = {
-    "biometric":           "⚠ BIOMETRIC",
-    "surveillance":        "⚠ SURVEILLANCE",
-    "automated_decision":  "⚠ AUTO-DECISION",
-    "algorithmic_decision": "⚠ ALGO-HIRING",
-    "recording":           "⚠ RECORDING",
-    "law_enforcement":     "⚠ LAW ENFORCEMENT",
-    "identity_document":   "⚠ ID DOCUMENT",
+    "biometric":            "BIOMETRIC",
+    "surveillance":         "SURVEILLANCE",
+    "automated_decision":   "AUTO-DECISION",
+    "algorithmic_decision": "ALGO-HIRING",
+    "recording":            "RECORDING",
+    "law_enforcement":      "LAW ENFORCEMENT",
+    "identity_document":    "ID DOCUMENT",
 }
 
 CAPABILITY_COLORS = {
-    "Image Recognition / Computer Vision":      "#4cc9f0",
-    "Natural Language Understanding":           "#9b59b6",
-    "Personalization":                          "#f72585",
-    "Personalization / Algorithmic Matching":   "#f72585",
-    "Speech/Text Recognition":                  "#4361ee",
-    "Automation / Predictive Scoring":          "#ff6b35",
-    "Document AI / IDP":                        "#06d6a0",
-    "Customer Service / Conversational AI":     "#ffd700",
-    "Monitoring and Surveillance":              "#e63946",
-    "Transportation / Surveillance":            "#e63946",
-    "Biometric Surveillance / Facial Recognition": "#ff0055",
-    "Algorithmic Hiring / Personalization":     "#ff6b35",
-    "Speech Synthesis":                         "#4361ee",
+    "Image Recognition / Computer Vision":       "#0284c7",
+    "Natural Language Understanding":            "#7c3aed",
+    "Personalization":                           "#db2777",
+    "Personalization / Algorithmic Matching":    "#db2777",
+    "Speech/Text Recognition":                   "#2563eb",
+    "Automation / Predictive Scoring":           "#ea580c",
+    "Document AI / IDP":                         "#059669",
+    "Customer Service / Conversational AI":      "#b45309",
+    "Monitoring and Surveillance":               "#dc2626",
+    "Transportation / Surveillance":             "#dc2626",
+    "Biometric Surveillance / Facial Recognition": "#9f1239",
+    "Algorithmic Hiring / Personalization":      "#ea580c",
+    "Speech Synthesis":                          "#2563eb",
 }
 
 # ── CSS ───────────────────────────────────────────────────────────────────────
 
 CUSTOM_CSS = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-    --bg:       #08111e;
-    --surface:  #0d1c2e;
-    --surface2: #0a1625;
-    --border:   #1a2e42;
-    --text:     #e2e8f0;
-    --muted:    #5d7a8f;
-    --red:      #e63946;
-    --amber:    #f4a261;
-    --green:    #57cc99;
-    --blue:     #4cc9f0;
+    --bg:       #ffffff;
+    --surface:  #f8fafc;
+    --surface2: #f1f5f9;
+    --border:   #e2e8f0;
+    --text:     #0f172a;
+    --muted:    #64748b;
+    --light:    #94a3b8;
+    --red:      #dc2626;
+    --amber:    #d97706;
+    --green:    #059669;
+    --blue:     #0284c7;
     --font:     'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --mono:     'Space Mono', 'Courier New', monospace;
 }
@@ -260,16 +261,16 @@ CUSTOM_CSS = """
 }
 
 * { font-family: var(--font) !important; }
-code, pre, .mono { font-family: var(--mono) !important; }
+code, pre { font-family: var(--mono) !important; }
 
 #MainMenu, footer, header { visibility: hidden; }
 .stDeployButton { display: none; }
 div[data-testid="stDecoration"] { display: none; }
 
-/* ── Tabs ────────────────────────────────────────────────────────────── */
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
 .stTabs [data-baseweb="tab-list"] {
     background: var(--bg) !important;
-    border-bottom: 1px solid var(--border) !important;
+    border-bottom: 2px solid var(--border) !important;
     gap: 0 !important;
     padding: 0 !important;
 }
@@ -284,15 +285,16 @@ div[data-testid="stDecoration"] { display: none; }
     border: none !important;
     border-bottom: 2px solid transparent !important;
     border-radius: 0 !important;
+    margin-bottom: -2px !important;
 }
 .stTabs [aria-selected="true"] {
-    color: #ffffff !important;
+    color: var(--text) !important;
     border-bottom: 2px solid var(--red) !important;
     background: transparent !important;
 }
 .stTabs [data-baseweb="tab-panel"] {
     background: var(--bg) !important;
-    padding-top: 2.5rem !important;
+    padding-top: 2rem !important;
 }
 
 /* ── Buttons ──────────────────────────────────────────────────────────── */
@@ -300,31 +302,30 @@ div[data-testid="stDecoration"] { display: none; }
     background: var(--red) !important;
     color: #fff !important;
     border: none !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
     font-family: var(--mono) !important;
     font-size: 0.65rem !important;
-    letter-spacing: 0.18em !important;
+    letter-spacing: 0.15em !important;
     text-transform: uppercase !important;
-    padding: 0.75rem 2.2rem !important;
-    transition: background 0.15s ease !important;
+    padding: 0.75rem 2rem !important;
 }
-.stButton > button:hover { background: #b71c1c !important; border: none !important; }
+.stButton > button:hover { background: #b91c1c !important; }
 
-/* ── Selectbox ───────────────────────────────────────────────────────── */
+/* ── Selectbox ────────────────────────────────────────────────────────── */
 .stSelectbox > div > div {
     background: var(--surface) !important;
     border-color: var(--border) !important;
     color: var(--text) !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
 }
 
-/* ── Metrics ─────────────────────────────────────────────────────────── */
+/* ── Metrics ──────────────────────────────────────────────────────────── */
 [data-testid="metric-container"] {
     background: var(--surface) !important;
     border: 1px solid var(--border) !important;
     border-left: 3px solid var(--red) !important;
     padding: 1rem 1.2rem !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
 }
 [data-testid="stMetricLabel"] > div {
     font-family: var(--mono) !important;
@@ -336,15 +337,15 @@ div[data-testid="stDecoration"] { display: none; }
 [data-testid="stMetricValue"] > div {
     font-family: var(--mono) !important;
     font-size: 2rem !important;
-    color: #fff !important;
+    color: var(--text) !important;
     font-weight: 700 !important;
 }
 [data-testid="stMetricDelta"] { display: none; }
 
-/* ── Progress ────────────────────────────────────────────────────────── */
+/* ── Progress ─────────────────────────────────────────────────────────── */
 .stProgress > div > div > div { background: var(--red) !important; }
 
-/* ── Sidebar ─────────────────────────────────────────────────────────── */
+/* ── Sidebar ──────────────────────────────────────────────────────────── */
 [data-testid="stSidebar"] {
     background: var(--surface) !important;
     border-right: 1px solid var(--border) !important;
@@ -353,316 +354,126 @@ div[data-testid="stDecoration"] { display: none; }
     background: var(--bg) !important;
     border-color: var(--border) !important;
     color: var(--text) !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
     font-family: var(--mono) !important;
     font-size: 0.8rem !important;
 }
 
-/* ── Spinner ─────────────────────────────────────────────────────────── */
+/* ── Spinner ──────────────────────────────────────────────────────────── */
 .stSpinner > div { border-top-color: var(--red) !important; }
 
-/* ── Alerts ──────────────────────────────────────────────────────────── */
+/* ── Alerts ───────────────────────────────────────────────────────────── */
 .stAlert {
     background: var(--surface) !important;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
     color: var(--text) !important;
 }
 
-/* ── Scrollbar ───────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 3px; height: 3px; }
+/* ── Scrollbar ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #252525; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 /* ── Custom component classes ─────────────────────────────────────────── */
 
-.hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.28em;
-    color: var(--red);
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-}
-.hero-title {
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 700;
-    line-height: 1.02;
-    color: #fff;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-}
-.hero-subtitle {
-    font-size: 0.95rem;
-    color: #666;
-    max-width: 560px;
-    line-height: 1.75;
-}
-.hero-rule {
-    border: none;
-    border-top: 1px solid #1a1a1a;
-    margin: 1.8rem 0 0 0;
-}
-.hero-source {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    color: #2a2a2a;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-top: 0.8rem;
-}
 .section-label {
     font-family: var(--mono);
     font-size: 0.6rem;
     letter-spacing: 0.22em;
-    color: #444;
+    color: var(--light);
     text-transform: uppercase;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--border);
     margin-bottom: 1.2rem;
 }
+
 .risk-badge-CRITICAL {
     display: inline-block;
-    background: #200000;
-    color: #ff2222;
-    border: 1px solid #660000;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
     font-size: 0.6rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     font-weight: 700;
+    border-radius: 2px;
 }
 .risk-badge-HIGH {
     display: inline-block;
-    background: #1a0800;
-    color: #ff6b35;
-    border: 1px solid #663300;
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fb923c;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
     font-size: 0.6rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     font-weight: 700;
+    border-radius: 2px;
 }
 .risk-badge-MEDIUM {
     display: inline-block;
-    background: #1a1400;
-    color: #ffd700;
-    border: 1px solid #665500;
+    background: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fcd34d;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
     font-size: 0.6rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     font-weight: 700;
+    border-radius: 2px;
 }
 .risk-badge-LOW {
     display: inline-block;
-    background: #001408;
-    color: #57cc99;
-    border: 1px solid #005528;
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #86efac;
     padding: 0.1rem 0.55rem;
     font-family: var(--mono);
     font-size: 0.6rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     font-weight: 700;
+    border-radius: 2px;
 }
+
 .flag-tag {
     display: inline-block;
-    background: #180e00;
-    color: var(--amber);
-    border: 1px solid #3d2000;
+    background: #fff7ed;
+    color: #d97706;
+    border: 1px solid #fcd34d;
     padding: 0.08rem 0.4rem;
     font-family: var(--mono);
     font-size: 0.55rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     margin-left: 0.5rem;
     vertical-align: middle;
+    border-radius: 2px;
 }
-.system-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.9rem;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid #151515;
-}
-.system-num {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: #2a2a2a;
-    min-width: 1.8rem;
-    padding-top: 0.15rem;
-}
-.system-name {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.3;
-}
-.system-meta {
-    font-size: 0.73rem;
-    color: var(--muted);
-    margin-top: 0.15rem;
-}
-.system-cap {
-    font-size: 0.7rem;
-    color: #333;
-    margin-top: 0.1rem;
-    font-family: var(--mono);
-}
-.analysis-section-head {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.18em;
-    color: #444;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    margin-top: 1.4rem;
-}
-.analysis-section-head:first-child { margin-top: 0; }
-.bullet-item {
-    font-size: 0.84rem;
-    color: #bbb;
-    padding: 0.18rem 0;
-    line-height: 1.55;
-    padding-left: 1.1rem;
-    position: relative;
-}
-.bullet-item::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--red);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-}
-.question-item {
-    font-size: 0.84rem;
-    color: #bbb;
-    padding: 0.18rem 0;
-    line-height: 1.55;
-    padding-left: 1.5rem;
-    position: relative;
-    counter-increment: q;
-}
-.question-item::before {
-    content: counter(q, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    color: var(--blue);
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-}
-.question-list { counter-reset: q; }
-.gap-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--amber);
-    padding: 0.9rem 1.1rem;
-    margin-bottom: 0.45rem;
-}
-.gap-agency { font-size: 0.88rem; font-weight: 600; color: #ffd700; }
-.gap-detail { font-size: 0.78rem; color: #777; margin-top: 0.25rem; line-height: 1.5; }
-.gap-basis  { font-size: 0.72rem; color: #444; margin-top: 0.15rem; font-style: italic; }
-.cat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--blue);
-    padding: 0.9rem 1.1rem;
-    margin-bottom: 0.45rem;
-}
-.cat-name   { font-size: 0.88rem; font-weight: 600; color: var(--blue); }
-.cat-detail { font-size: 0.78rem; color: #777; margin-top: 0.25rem; line-height: 1.5; }
-.headline-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-left: 5px solid var(--red);
-    padding: 1.4rem 1.8rem;
-    margin: 1.5rem 0;
-}
-.headline-label {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    color: #444;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-.headline-text {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.3;
-}
-.credibility-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 1.1rem 1.4rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.87rem;
-    color: #aaa;
-    line-height: 1.75;
-}
-.cred-label {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    color: #444;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-.leg-question {
-    background: var(--surface2);
-    border-left: 2px solid var(--blue);
-    padding: 0.65rem 1rem;
-    margin-bottom: 0.35rem;
-    font-size: 0.84rem;
-    color: #bbb;
-    line-height: 1.55;
-}
-.struct-item {
-    font-size: 0.84rem;
-    color: #bbb;
-    padding: 0.18rem 0 0.18rem 1.1rem;
-    line-height: 1.55;
-    position: relative;
-}
-.struct-item::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: var(--red);
-    font-size: 0.7rem;
-}
-.empty-state {
-    background: var(--surface);
-    border: 1px dashed #1e1e1e;
-    padding: 3rem 2rem;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: #2a2a2a;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 1rem;
-}
+
 .about-card {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 1.3rem 1.5rem;
     margin-bottom: 0.8rem;
+    border-radius: 4px;
 }
 .about-label {
     font-family: var(--mono);
     font-size: 0.58rem;
-    color: #444;
+    color: var(--light);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     margin-bottom: 0.55rem;
 }
-.about-text { font-size: 0.87rem; color: #888; line-height: 1.75; }
+.about-text {
+    font-size: 0.87rem;
+    color: #374151;
+    line-height: 1.75;
+}
 </style>
 """
 
-# ── HELPER FUNCTIONS ──────────────────────────────────────────────────────────
+# ── HELPERS ───────────────────────────────────────────────────────────────────
 
 def risk_badge(level: str) -> str:
     return f'<span class="risk-badge-{level}">{level}</span>'
@@ -677,12 +488,12 @@ def flag_html(flag) -> str:
 
 def score_color(score: int) -> str:
     if score >= 75:
-        return "#e63946"
+        return "#dc2626"
     if score >= 50:
-        return "#ff6b35"
+        return "#c2410c"
     if score >= 30:
-        return "#ffd700"
-    return "#57cc99"
+        return "#92400e"
+    return "#15803d"
 
 
 def get_client():
@@ -698,14 +509,6 @@ def get_client():
     return Anthropic(api_key=key)
 
 
-def bullet_list(items: list, color: str = "#e63946") -> str:
-    style = f"color:{color}"
-    return "".join(
-        f'<div class="bullet-item" style="--bullet-color:{color}">{item}</div>'
-        for item in items
-    )
-
-
 # ── CHARTS ────────────────────────────────────────────────────────────────────
 
 def capability_chart():
@@ -714,7 +517,7 @@ def capability_chart():
     labels = list(counts.keys())
     values = list(counts.values())
     short_labels = [lb.split("/")[0].strip() for lb in labels]
-    colors = [CAPABILITY_COLORS.get(lb, "#333") for lb in labels]
+    colors = [CAPABILITY_COLORS.get(lb, "#94a3b8") for lb in labels]
 
     fig = go.Figure(
         go.Bar(
@@ -724,17 +527,17 @@ def capability_chart():
             marker_color=colors,
             text=values,
             textposition="outside",
-            textfont=dict(family="Space Mono", size=9, color="#555"),
+            textfont=dict(family="Space Mono", size=9, color="#64748b"),
         )
     )
     fig.update_layout(
-        paper_bgcolor="#0a0a0a",
-        plot_bgcolor="#0a0a0a",
-        font=dict(family="Space Grotesk", color="#666", size=10),
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#ffffff",
+        font=dict(family="Space Grotesk", color="#64748b", size=10),
         height=290,
         margin=dict(l=0, r=30, t=8, b=8),
         xaxis=dict(showgrid=False, showticklabels=False, zeroline=False),
-        yaxis=dict(showgrid=False, tickfont=dict(size=9, color="#888")),
+        yaxis=dict(showgrid=False, tickfont=dict(size=9, color="#374151")),
         showlegend=False,
     )
     return fig
@@ -754,14 +557,14 @@ def vendor_donut():
             labels=list(buckets.keys()),
             values=list(buckets.values()),
             hole=0.62,
-            marker_colors=["#4cc9f0", "#e63946"],
+            marker_colors=["#0284c7", "#dc2626"],
             textinfo="label+percent",
-            textfont=dict(family="Space Mono", size=8, color="#888"),
+            textfont=dict(family="Space Mono", size=9, color="#374151"),
         )
     )
     fig.update_layout(
-        paper_bgcolor="#0a0a0a",
-        font=dict(family="Space Grotesk", color="#666"),
+        paper_bgcolor="#ffffff",
+        font=dict(family="Space Grotesk", color="#64748b"),
         height=200,
         margin=dict(l=0, r=0, t=8, b=8),
         showlegend=False,
@@ -769,7 +572,7 @@ def vendor_donut():
     return fig
 
 
-# ── MAIN APP ──────────────────────────────────────────────────────────────────
+# ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
     st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
@@ -778,7 +581,7 @@ def main():
     with st.sidebar:
         st.markdown(
             '<p style="font-family:\'Space Mono\',monospace;font-size:0.58rem;'
-            'color:#444;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem">'
+            'color:#94a3b8;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.4rem">'
             "Anthropic API Key</p>",
             unsafe_allow_html=True,
         )
@@ -788,36 +591,43 @@ def main():
         if api_input:
             os.environ["ANTHROPIC_API_KEY"] = api_input
             st.markdown(
-                '<p style="font-family:\'Space Mono\',monospace;font-size:0.6rem;color:#57cc99;margin-top:0.3rem">'
-                "● KEY LOADED</p>",
+                '<p style="font-family:\'Space Mono\',monospace;font-size:0.6rem;'
+                'color:#059669;margin-top:0.3rem">Key loaded</p>',
                 unsafe_allow_html=True,
             )
         else:
             st.markdown(
-                '<p style="font-family:\'Space Mono\',monospace;font-size:0.6rem;color:#333;margin-top:0.3rem">'
-                "● NO KEY — analyses disabled</p>",
+                '<p style="font-family:\'Space Mono\',monospace;font-size:0.6rem;'
+                'color:#94a3b8;margin-top:0.3rem">No key — analyses disabled</p>',
                 unsafe_allow_html=True,
             )
         st.markdown(
-            '<hr style="border:none;border-top:1px solid #1a1a1a;margin:1.2rem 0">'
-            '<p style="font-family:\'Space Mono\',monospace;font-size:0.55rem;color:#2a2a2a;line-height:1.7">'
-            "Get a key at<br>console.anthropic.com</p>",
+            '<hr style="border:none;border-top:1px solid #e2e8f0;margin:1.2rem 0">'
+            '<p style="font-family:\'Space Mono\',monospace;font-size:0.55rem;'
+            'color:#cbd5e1;line-height:1.7">Get a key at<br>console.anthropic.com</p>',
             unsafe_allow_html=True,
         )
 
     # ── HERO ──────────────────────────────────────────────────────────────────
     st.markdown(
         """
-        <div style="padding:3.5rem 0 2rem 0; border-bottom:1px solid #1a2e42; margin-bottom:2.2rem">
-            <div class="hero-eyebrow">New York State · AI Transparency Investigation · 2025</div>
-            <div class="hero-title">NY AI<br>Systems Watch</div>
-            <div class="hero-subtitle">
+        <div style="padding:3.5rem 0 2rem 0;border-bottom:1px solid #e2e8f0;margin-bottom:2.2rem">
+            <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.28em;
+                color:#dc2626;text-transform:uppercase;margin-bottom:0.8rem">
+                New York State &nbsp;·&nbsp; AI Transparency Investigation &nbsp;·&nbsp; 2025
+            </div>
+            <div style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.02;
+                color:#0f172a;margin-bottom:1rem;letter-spacing:-0.02em">
+                NY AI<br>Systems Watch
+            </div>
+            <div style="font-size:0.95rem;color:#64748b;max-width:560px;line-height:1.75">
                 New York State published its first public AI inventory in September 2025.
-                Nineteen systems. Thirteen agencies. Across a government of 50+ executive bodies.<br><br>
+                Nineteen systems. Thirteen agencies. Across a government of 50 or more executive bodies.<br><br>
                 This tool examines what was disclosed and asks hard questions about what was not.
             </div>
-            <hr class="hero-rule">
-            <div class="hero-source">
+            <hr style="border:none;border-top:1px solid #e2e8f0;margin:1.8rem 0 0 0">
+            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#cbd5e1;
+                letter-spacing:0.18em;text-transform:uppercase;margin-top:0.8rem">
                 Dataset: NYS AI Systems Inventory, Beginning September 2025 &nbsp;·&nbsp;
                 Source: USA Data.gov / NY Open Data / Office of Information Technology Services
             </div>
@@ -826,7 +636,7 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # ── STATS ROW ─────────────────────────────────────────────────────────────
+    # ── STATS ─────────────────────────────────────────────────────────────────
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.metric("Systems Disclosed", "19")
@@ -845,7 +655,7 @@ def main():
     )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 1 — THE INVENTORY
+    # TAB 1: THE INVENTORY
     # ─────────────────────────────────────────────────────────────────────────
     with tab1:
         st.markdown('<div class="section-label">All 19 Disclosed Systems</div>', unsafe_allow_html=True)
@@ -857,12 +667,23 @@ def main():
                 f = flag_html(sys.get("flag"))
                 st.markdown(
                     f"""
-                    <div class="system-row">
-                        <div class="system-num">{'%02d' % sys['id']}</div>
+                    <div style="display:flex;align-items:flex-start;gap:0.9rem;
+                        padding:0.85rem 0;border-bottom:1px solid #f1f5f9">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.6rem;
+                            color:#cbd5e1;min-width:1.8rem;padding-top:0.15rem">
+                            {'%02d' % sys['id']}
+                        </div>
                         <div>
-                            <div class="system-name">{sys['product']}{f}</div>
-                            <div class="system-meta">{sys['agency']} &nbsp;·&nbsp; {sys['vendor']}</div>
-                            <div class="system-cap">{sys['capability']}</div>
+                            <div style="font-size:0.88rem;font-weight:600;color:#0f172a;line-height:1.3">
+                                {sys['product']}{f}
+                            </div>
+                            <div style="font-size:0.73rem;color:#64748b;margin-top:0.15rem">
+                                {sys['agency']} &nbsp;·&nbsp; {sys['vendor']}
+                            </div>
+                            <div style="font-size:0.7rem;color:#94a3b8;margin-top:0.1rem;
+                                font-family:'Space Mono',monospace">
+                                {sys['capability']}
+                            </div>
                         </div>
                     </div>
                     """,
@@ -872,26 +693,32 @@ def main():
         with col_charts:
             st.markdown('<div class="section-label">Capability Breakdown</div>', unsafe_allow_html=True)
             st.plotly_chart(
-                capability_chart(), use_container_width=True, config={"displayModeBar": False}
+                capability_chart(),
+                use_container_width=True,
+                config={"displayModeBar": False},
+                key="cap_chart_tab1",
             )
 
             st.markdown('<div class="section-label">Vendor Concentration</div>', unsafe_allow_html=True)
             st.plotly_chart(
-                vendor_donut(), use_container_width=True, config={"displayModeBar": False}
+                vendor_donut(),
+                use_container_width=True,
+                config={"displayModeBar": False},
+                key="vendor_chart_tab1",
             )
 
             flagged_count = sum(1 for s in INVENTORY if s.get("flag"))
             st.markdown(
                 f"""
-                <div style="background:var(--surface);border:1px solid var(--border);
-                    border-left:3px solid var(--amber);padding:0.9rem 1.1rem;margin-top:0.5rem">
-                    <div style="font-family:'Space Mono',monospace;font-size:0.58rem;
-                        color:#444;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.3rem">
+                <div style="background:#fffbeb;border:1px solid #fcd34d;border-left:3px solid #d97706;
+                    padding:0.9rem 1.1rem;margin-top:0.5rem;border-radius:4px">
+                    <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#92400e;
+                        letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.3rem">
                         High-Attention Flags
                     </div>
                     <div style="font-family:'Space Mono',monospace;font-size:2rem;
-                        font-weight:700;color:var(--amber)">{flagged_count}</div>
-                    <div style="font-size:0.72rem;color:#555;margin-top:0.15rem">
+                        font-weight:700;color:#d97706">{flagged_count}</div>
+                    <div style="font-size:0.72rem;color:#92400e;margin-top:0.15rem">
                         systems with surveillance, biometric, or automated-decision flags
                     </div>
                 </div>
@@ -900,12 +727,12 @@ def main():
             )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 2 — ETHICS AUDIT
+    # TAB 2: ETHICS AUDIT
     # ─────────────────────────────────────────────────────────────────────────
     with tab2:
-        st.markdown('<div class="section-label">Live Ethics Analysis · Powered by Claude</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-label">Live Ethics Analysis - Powered by Claude</div>', unsafe_allow_html=True)
         st.markdown(
-            '<p style="font-size:0.84rem;color:#555;line-height:1.75;margin-bottom:1.5rem">'
+            '<p style="font-size:0.84rem;color:#64748b;line-height:1.75;margin-bottom:1.5rem">'
             "Select any system. Claude analyzes it through a civil liberties and public accountability lens: "
             "assessing risk, identifying affected populations, flagging privacy concerns, and generating "
             "questions the public should be asking."
@@ -913,25 +740,28 @@ def main():
             unsafe_allow_html=True,
         )
 
-        options = {f"{s['product']}  —  {s['agency']}": s for s in INVENTORY}
+        options = {f"{s['product']}  --  {s['agency']}": s for s in INVENTORY}
         selected_label = st.selectbox(
             "Select a system", list(options.keys()), label_visibility="collapsed"
         )
         selected = options[selected_label]
 
         f = flag_html(selected.get("flag"))
-        excerpt = selected["purpose"][:200] + ("…" if len(selected["purpose"]) > 200 else "")
+        excerpt = selected["purpose"][:200] + ("..." if len(selected["purpose"]) > 200 else "")
         st.markdown(
             f"""
-            <div style="background:var(--surface);border:1px solid var(--border);
-                padding:1rem 1.2rem;margin:0.8rem 0 1rem 0">
-                <span style="font-size:0.88rem;font-weight:600;color:#ccc">{selected['product']}</span>
-                {f}
-                <span style="color:#2a2a2a">&nbsp;·&nbsp;</span>
-                <span style="font-size:0.82rem;color:#555">{selected['agency']}</span>
-                <span style="color:#2a2a2a">&nbsp;·&nbsp;</span>
-                <span style="font-size:0.82rem;color:#444">{selected['vendor']}</span>
-                <div style="font-size:0.78rem;color:#444;margin-top:0.5rem;line-height:1.6">{excerpt}</div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:1rem 1.2rem;
+                margin:0.8rem 0 1rem 0;border-radius:4px">
+                <span style="font-size:0.88rem;font-weight:600;color:#0f172a">
+                    {selected['product']}
+                </span>{f}
+                <span style="color:#e2e8f0">&nbsp;·&nbsp;</span>
+                <span style="font-size:0.82rem;color:#64748b">{selected['agency']}</span>
+                <span style="color:#e2e8f0">&nbsp;·&nbsp;</span>
+                <span style="font-size:0.82rem;color:#94a3b8">{selected['vendor']}</span>
+                <div style="font-size:0.78rem;color:#94a3b8;margin-top:0.5rem;line-height:1.6">
+                    {excerpt}
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -947,7 +777,7 @@ def main():
             if not client:
                 st.warning("Add your Anthropic API key in the sidebar to run live analysis.")
             else:
-                with st.spinner("Analyzing…"):
+                with st.spinner("Analyzing..."):
                     try:
                         result = analyze_system(client, selected)
                         st.session_state.analyses[selected_label] = result
@@ -960,34 +790,36 @@ def main():
             score = r.get("risk_score", 0)
             t_score = r.get("transparency_score", 0)
 
-            # Header bar
             st.markdown(
                 f"""
                 <div style="display:flex;align-items:center;justify-content:space-between;
-                    background:var(--surface2);border:1px solid var(--border);
-                    padding:1rem 1.5rem;margin-top:0.5rem">
+                    background:#f8fafc;border:1px solid #e2e8f0;padding:1rem 1.5rem;
+                    margin-top:0.5rem;border-radius:4px">
                     <div>
-                        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;
-                            color:#333;letter-spacing:0.18em;text-transform:uppercase;
-                            margin-bottom:0.3rem">Risk Level</div>
+                        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;color:#94a3b8;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.3rem">
+                            Risk Level
+                        </div>
                         {risk_badge(level)}
                     </div>
                     <div style="text-align:right">
-                        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;
-                            color:#333;letter-spacing:0.18em;text-transform:uppercase;
-                            margin-bottom:0.3rem">Risk Score</div>
+                        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;color:#94a3b8;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.3rem">
+                            Risk Score
+                        </div>
                         <div style="font-family:'Space Mono',monospace;font-size:1.5rem;
                             font-weight:700;color:{score_color(score)}">{score}
-                            <span style="font-size:0.65rem;color:#333">/100</span>
+                            <span style="font-size:0.65rem;color:#94a3b8">/100</span>
                         </div>
                     </div>
                     <div style="text-align:right">
-                        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;
-                            color:#333;letter-spacing:0.18em;text-transform:uppercase;
-                            margin-bottom:0.3rem">Transparency</div>
+                        <div style="font-family:'Space Mono',monospace;font-size:0.55rem;color:#94a3b8;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.3rem">
+                            Transparency
+                        </div>
                         <div style="font-family:'Space Mono',monospace;font-size:1.5rem;
-                            font-weight:700;color:var(--blue)">{t_score}
-                            <span style="font-size:0.65rem;color:#333">/10</span>
+                            font-weight:700;color:#0284c7">{t_score}
+                            <span style="font-size:0.65rem;color:#94a3b8">/10</span>
                         </div>
                     </div>
                 </div>
@@ -996,16 +828,18 @@ def main():
             )
             st.progress(score / 100)
 
-            # Summary
             st.markdown(
                 f"""
-                <div style="background:var(--surface2);border:1px solid var(--border);
-                    border-left:3px solid var(--red);padding:1.2rem 1.5rem;margin:0.8rem 0">
-                    <div class="analysis-section-head">Summary</div>
-                    <p style="font-size:0.87rem;color:#bbb;line-height:1.75;margin:0">
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:3px solid #dc2626;
+                    padding:1.2rem 1.5rem;margin:0.8rem 0;border-radius:4px">
+                    <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#94a3b8;
+                        letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
+                        Summary
+                    </div>
+                    <p style="font-size:0.87rem;color:#374151;line-height:1.75;margin:0">
                         {r.get('summary', '')}
                     </p>
-                    <p style="font-size:0.78rem;color:#444;line-height:1.6;margin:0.6rem 0 0 0;
+                    <p style="font-size:0.78rem;color:#94a3b8;line-height:1.6;margin:0.6rem 0 0 0;
                         font-style:italic">
                         {r.get('transparency_assessment', '')}
                     </p>
@@ -1019,13 +853,19 @@ def main():
             with left_col:
                 pops = r.get("affected_populations", [])
                 items_html = "".join(
-                    f'<div class="bullet-item">{p}</div>' for p in pops
+                    f'<div style="padding:0.2rem 0 0.2rem 0;font-size:0.84rem;color:#374151;'
+                    f'line-height:1.55"><span style="color:#dc2626;font-family:\'Space Mono\','
+                    f'monospace;margin-right:0.4rem">&#8594;</span>{p}</div>'
+                    for p in pops
                 )
                 st.markdown(
                     f"""
-                    <div style="background:var(--surface);border:1px solid var(--border);
-                        padding:1rem 1.2rem;margin-bottom:0.5rem">
-                        <div class="analysis-section-head">Affected Populations</div>
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:1rem 1.2rem;
+                        margin-bottom:0.5rem;border-radius:4px">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#94a3b8;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
+                            Affected Populations
+                        </div>
                         {items_html}
                     </div>
                     """,
@@ -1035,13 +875,19 @@ def main():
                 privacy = r.get("privacy_concerns", [])
                 if privacy:
                     items_html = "".join(
-                        f'<div class="bullet-item">{p}</div>' for p in privacy
+                        f'<div style="padding:0.2rem 0 0.2rem 0;font-size:0.84rem;color:#374151;'
+                        f'line-height:1.55"><span style="color:#dc2626;font-family:\'Space Mono\','
+                        f'monospace;margin-right:0.4rem">&#8594;</span>{p}</div>'
+                        for p in privacy
                     )
                     st.markdown(
                         f"""
-                        <div style="background:var(--surface);border:1px solid var(--border);
-                            padding:1rem 1.2rem;margin-bottom:0.5rem">
-                            <div class="analysis-section-head">Privacy Concerns</div>
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:1rem 1.2rem;
+                            margin-bottom:0.5rem;border-radius:4px">
+                            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#94a3b8;
+                                letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
+                                Privacy Concerns
+                            </div>
                             {items_html}
                         </div>
                         """,
@@ -1052,13 +898,19 @@ def main():
                 clf = r.get("civil_liberties_flags", [])
                 if clf:
                     items_html = "".join(
-                        f'<div class="bullet-item">{c}</div>' for c in clf
+                        f'<div style="padding:0.2rem 0 0.2rem 0;font-size:0.84rem;color:#374151;'
+                        f'line-height:1.55"><span style="color:#dc2626;font-family:\'Space Mono\','
+                        f'monospace;margin-right:0.4rem">&#8594;</span>{c}</div>'
+                        for c in clf
                     )
                     st.markdown(
                         f"""
-                        <div style="background:var(--surface);border:1px solid var(--border);
-                            border-left:3px solid var(--red);padding:1rem 1.2rem;margin-bottom:0.5rem">
-                            <div class="analysis-section-head" style="color:var(--red)">Civil Liberties Flags</div>
+                        <div style="background:#fef2f2;border:1px solid #fca5a5;border-left:3px solid #dc2626;
+                            padding:1rem 1.2rem;margin-bottom:0.5rem;border-radius:4px">
+                            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#dc2626;
+                                letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
+                                Civil Liberties Flags
+                            </div>
                             {items_html}
                         </div>
                         """,
@@ -1068,13 +920,19 @@ def main():
                 gaps_a = r.get("accountability_gaps", [])
                 if gaps_a:
                     items_html = "".join(
-                        f'<div class="bullet-item">{g}</div>' for g in gaps_a
+                        f'<div style="padding:0.2rem 0 0.2rem 0;font-size:0.84rem;color:#374151;'
+                        f'line-height:1.55"><span style="color:#d97706;font-family:\'Space Mono\','
+                        f'monospace;margin-right:0.4rem">&#8594;</span>{g}</div>'
+                        for g in gaps_a
                     )
                     st.markdown(
                         f"""
-                        <div style="background:var(--surface);border:1px solid var(--border);
-                            border-left:3px solid var(--amber);padding:1rem 1.2rem;margin-bottom:0.5rem">
-                            <div class="analysis-section-head" style="color:var(--amber)">Accountability Gaps</div>
+                        <div style="background:#fffbeb;border:1px solid #fcd34d;border-left:3px solid #d97706;
+                            padding:1rem 1.2rem;margin-bottom:0.5rem;border-radius:4px">
+                            <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#92400e;
+                                letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
+                                Accountability Gaps
+                            </div>
                             {items_html}
                         </div>
                         """,
@@ -1084,16 +942,20 @@ def main():
             qs = r.get("key_questions", [])
             if qs:
                 items_html = "".join(
-                    f'<div class="question-item">{q}</div>' for q in qs
+                    f'<div style="padding:0.25rem 0 0.25rem 0;font-size:0.84rem;color:#374151;line-height:1.55">'
+                    f'<span style="font-family:\'Space Mono\',monospace;color:#0284c7;font-weight:700;'
+                    f'margin-right:0.6rem">{str(i).zfill(2)}.</span>{q}</div>'
+                    for i, q in enumerate(qs, 1)
                 )
                 st.markdown(
                     f"""
-                    <div style="background:var(--surface2);border:1px solid var(--border);
-                        border-left:3px solid var(--blue);padding:1rem 1.5rem">
-                        <div class="analysis-section-head" style="color:var(--blue)">
+                    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:3px solid #0284c7;
+                        padding:1rem 1.5rem;border-radius:4px">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#0284c7;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
                             Questions to Ask This Agency
                         </div>
-                        <div class="question-list">{items_html}</div>
+                        {items_html}
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -1101,19 +963,24 @@ def main():
 
         elif not run_btn:
             st.markdown(
-                '<div class="empty-state">Select a system above and click "Run Ethics Analysis"</div>',
+                '<div style="background:#f8fafc;border:1px dashed #e2e8f0;padding:3rem 2rem;'
+                'text-align:center;color:#cbd5e1;font-family:\'Space Mono\',monospace;'
+                'font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;'
+                'margin-top:1rem;border-radius:4px">'
+                'Select a system above and click "Run Ethics Analysis"'
+                "</div>",
                 unsafe_allow_html=True,
             )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 3 — ACCOUNTABILITY GAP
+    # TAB 3: ACCOUNTABILITY GAP
     # ─────────────────────────────────────────────────────────────────────────
     with tab3:
         st.markdown('<div class="section-label">What\'s Missing From the Inventory</div>', unsafe_allow_html=True)
         st.markdown(
-            '<p style="font-size:0.84rem;color:#555;line-height:1.75;margin-bottom:1.5rem">'
+            '<p style="font-size:0.84rem;color:#64748b;line-height:1.75;margin-bottom:1.5rem">'
             "New York State has over 50 executive agencies. Only 13 reported any AI systems. "
-            "Claude analyzes the gaps: which agencies likely use public-facing AI but didn't disclose it, "
+            "Claude analyzes the gaps: which agencies likely use public-facing AI but did not disclose it, "
             "what categories of AI are conspicuously absent, and what questions policymakers should be asking."
             "</p>",
             unsafe_allow_html=True,
@@ -1129,7 +996,7 @@ def main():
             if not client:
                 st.warning("Add your Anthropic API key in the sidebar to run live analysis.")
             else:
-                with st.spinner("Analyzing inventory gaps — this takes about 20 seconds…"):
+                with st.spinner("Analyzing inventory gaps - this takes about 20 seconds..."):
                     try:
                         result = analyze_gaps(client, INVENTORY)
                         st.session_state.gap_analysis = result
@@ -1143,9 +1010,15 @@ def main():
             if headline:
                 st.markdown(
                     f"""
-                    <div class="headline-box">
-                        <div class="headline-label">Generated Headline</div>
-                        <div class="headline-text">"{headline}"</div>
+                    <div style="background:#fef2f2;border:1px solid #fca5a5;border-left:5px solid #dc2626;
+                        padding:1.4rem 1.8rem;margin:1.5rem 0;border-radius:4px">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#94a3b8;
+                            letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem">
+                            Generated Headline
+                        </div>
+                        <div style="font-size:1.25rem;font-weight:700;color:#0f172a;line-height:1.3">
+                            "{headline}"
+                        </div>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -1155,8 +1028,12 @@ def main():
             if cred:
                 st.markdown(
                     f"""
-                    <div class="credibility-box">
-                        <div class="cred-label">Credibility Assessment</div>
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:1.1rem 1.4rem;
+                        margin-bottom:1.5rem;border-radius:4px;font-size:0.87rem;color:#374151;line-height:1.75">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#94a3b8;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
+                            Credibility Assessment
+                        </div>
                         {cred}
                     </div>
                     """,
@@ -1169,20 +1046,28 @@ def main():
                 missing = g.get("missing_agencies", [])
                 if missing:
                     st.markdown(
-                        '<div class="section-label">Agencies Likely Using AI — Not Reported</div>',
+                        '<div class="section-label">Agencies Likely Using AI - Not Reported</div>',
                         unsafe_allow_html=True,
                     )
                     for a in missing:
                         lvl = a.get("concern_level", "MEDIUM")
                         st.markdown(
                             f"""
-                            <div class="gap-card">
+                            <div style="background:#f8fafc;border:1px solid #e2e8f0;
+                                border-left:3px solid #d97706;padding:0.9rem 1.1rem;
+                                margin-bottom:0.45rem;border-radius:4px">
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                                    <div class="gap-agency">{a.get('agency','')}</div>
+                                    <div style="font-size:0.88rem;font-weight:600;color:#92400e">
+                                        {a.get('agency','')}
+                                    </div>
                                     {risk_badge(lvl)}
                                 </div>
-                                <div class="gap-detail">{a.get('likely_ai_uses','')}</div>
-                                <div class="gap-basis">{a.get('basis','')}</div>
+                                <div style="font-size:0.78rem;color:#64748b;margin-top:0.25rem;line-height:1.5">
+                                    {a.get('likely_ai_uses','')}
+                                </div>
+                                <div style="font-size:0.72rem;color:#94a3b8;margin-top:0.15rem;font-style:italic">
+                                    {a.get('basis','')}
+                                </div>
                             </div>
                             """,
                             unsafe_allow_html=True,
@@ -1199,12 +1084,18 @@ def main():
                         lvl = c.get("concern_level", "MEDIUM")
                         st.markdown(
                             f"""
-                            <div class="cat-card">
+                            <div style="background:#f0f9ff;border:1px solid #bae6fd;
+                                border-left:3px solid #0284c7;padding:0.9rem 1.1rem;
+                                margin-bottom:0.45rem;border-radius:4px">
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                                    <div class="cat-name">{c.get('category','')}</div>
+                                    <div style="font-size:0.88rem;font-weight:600;color:#0369a1">
+                                        {c.get('category','')}
+                                    </div>
                                     {risk_badge(lvl)}
                                 </div>
-                                <div class="cat-detail">{c.get('examples','')}</div>
+                                <div style="font-size:0.78rem;color:#64748b;margin-top:0.25rem;line-height:1.5">
+                                    {c.get('examples','')}
+                                </div>
                             </div>
                             """,
                             unsafe_allow_html=True,
@@ -1213,13 +1104,16 @@ def main():
             structural = g.get("structural_gaps", [])
             if structural:
                 items_html = "".join(
-                    f'<div class="struct-item">{s}</div>' for s in structural
+                    f'<div style="padding:0.2rem 0 0.2rem 0;font-size:0.84rem;color:#374151;line-height:1.55">'
+                    f'<span style="color:#dc2626;font-family:\'Space Mono\',monospace;margin-right:0.4rem">&#9658;</span>{s}</div>'
+                    for s in structural
                 )
                 st.markdown(
                     f"""
-                    <div style="background:var(--surface);border:1px solid var(--border);
-                        border-left:3px solid var(--red);padding:1rem 1.5rem;margin-top:0.8rem">
-                        <div class="analysis-section-head" style="color:var(--red)">
+                    <div style="background:#fef2f2;border:1px solid #fca5a5;border-left:3px solid #dc2626;
+                        padding:1rem 1.5rem;margin-top:0.8rem;border-radius:4px">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#dc2626;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
                             Structural Gaps in Inventory Design
                         </div>
                         {items_html}
@@ -1232,12 +1126,13 @@ def main():
             if best:
                 st.markdown(
                     f"""
-                    <div style="background:var(--surface);border:1px solid var(--border);
-                        border-left:3px solid var(--blue);padding:1rem 1.5rem;margin-top:0.5rem">
-                        <div class="analysis-section-head" style="color:var(--blue)">
+                    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:3px solid #0284c7;
+                        padding:1rem 1.5rem;margin-top:0.5rem;border-radius:4px">
+                        <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#0284c7;
+                            letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.5rem">
                             Compared to Best Practices
                         </div>
-                        <p style="font-size:0.86rem;color:#aaa;line-height:1.75;margin:0">{best}</p>
+                        <p style="font-size:0.86rem;color:#374151;line-height:1.75;margin:0">{best}</p>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -1246,15 +1141,16 @@ def main():
             leg_qs = g.get("legislative_questions", [])
             if leg_qs:
                 st.markdown(
-                    '<div class="section-label" style="margin-top:1.5rem">'
-                    "Questions for the NYS Legislature</div>",
+                    '<div class="section-label" style="margin-top:1.5rem">Questions for the NYS Legislature</div>',
                     unsafe_allow_html=True,
                 )
                 for i, q in enumerate(leg_qs, 1):
                     st.markdown(
                         f"""
-                        <div class="leg-question">
-                            <span style="font-family:'Space Mono',monospace;color:var(--blue);
+                        <div style="background:#f0f9ff;border-left:2px solid #0284c7;padding:0.65rem 1rem;
+                            margin-bottom:0.35rem;font-size:0.84rem;color:#374151;line-height:1.55;
+                            border-radius:0 4px 4px 0">
+                            <span style="font-family:'Space Mono',monospace;color:#0284c7;
                                 font-weight:700;margin-right:0.8rem">{i:02d}.</span>{q}
                         </div>
                         """,
@@ -1263,236 +1159,158 @@ def main():
 
         elif not run_gap:
             st.markdown(
-                '<div class="empty-state">Click "Run Accountability Gap Analysis" to begin</div>',
+                '<div style="background:#f8fafc;border:1px dashed #e2e8f0;padding:3rem 2rem;'
+                'text-align:center;color:#cbd5e1;font-family:\'Space Mono\',monospace;'
+                'font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;'
+                'margin-top:1rem;border-radius:4px">'
+                'Click "Run Accountability Gap Analysis" to begin'
+                "</div>",
                 unsafe_allow_html=True,
             )
 
     # ─────────────────────────────────────────────────────────────────────────
-    # TAB 4 — ABOUT
+    # TAB 4: ABOUT
     # ─────────────────────────────────────────────────────────────────────────
     with tab4:
         st.markdown('<div class="section-label">About This Project</div>', unsafe_allow_html=True)
 
-        # ── What This Is ────────────────────────────────────────────────────
-        with st.expander("What is NY AI Systems Watch?", expanded=True):
+        col_a, col_b = st.columns([3, 2], gap="large")
+
+        with col_a:
             st.markdown(
                 """
-                <div class="about-text">
-                NY AI Systems Watch is a public accountability tool built to help citizens,
-                researchers, journalists, and policymakers understand how artificial intelligence
-                is being deployed across New York State government agencies.<br><br>
-                The tool presents, analyzes, and critiques the NYS AI Systems Inventory, the first
-                public disclosure of government AI use in New York State history, published in
-                September 2025. It uses AI to analyze AI: each disclosed system is evaluated
-                through a civil liberties and public accountability lens, generating risk scores,
-                identifying affected populations, and surfacing the questions that government
-                agencies have not yet answered publicly.
+                <div class="about-card">
+                    <div class="about-label">The Dataset</div>
+                    <div class="about-text">
+                        The NYS AI Systems Inventory (Beginning September 2025) is New York State's
+                        first public disclosure of AI systems used by executive agencies that
+                        "directly impact the public." It was published by the Office of Information
+                        Technology Services (ITS) Chief AI Office and is updated annually.<br><br>
+                        The data powering this tool is sourced from the official USA Data.gov catalog,
+                        where it was published as an open government dataset. The inventory is
+                        self-reported by agencies. Back-office and internal AI tools are explicitly
+                        excluded from scope. The dataset's own documentation notes that it
+                        "may not capture pilot projects not yet disclosed, systems retired after
+                        reporting, or private vendor changes between inventory cycles."<br><br>
+                        <strong>Dataset Source:</strong>
+                        <a href="https://catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025"
+                           style="color:#0284c7;word-break:break-all" target="_blank">
+                           catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025
+                        </a>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-label">Methodology</div>
+                    <div class="about-text">
+                        This tool uses Claude (Anthropic) to analyze each AI system against
+                        civil liberties and public accountability frameworks, including the EU AI Act
+                        risk tiers, the NIST AI Risk Management Framework, and ACLU AI principles.<br><br>
+                        The gap analysis draws on Claude's knowledge of government AI deployments
+                        nationally to identify likely undisclosed uses. All AI analysis is generated
+                        at runtime and may contain errors or omissions. The goal is to surface
+                        questions and frame accountability discussions, not to make definitive
+                        legal or policy conclusions.
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-label">About the Researcher</div>
+                    <div class="about-text">
+                        <strong style="color:#0f172a;font-size:0.95rem">Anna Ebisike</strong><br>
+                        <span style="font-family:'Space Mono',monospace;font-size:0.62rem;
+                            color:#94a3b8;letter-spacing:0.1em;text-transform:uppercase">
+                            Digital Humanities Researcher
+                        </span><br><br>
+                        NY AI Systems Watch was developed by Anna Ebisike as a final project in a
+                        Digital Humanities course focused on coding with AI. Anna's work sits at
+                        the intersection of technology, public policy, and civic accountability,
+                        exploring how AI tools can make government more transparent and understandable
+                        to everyday people.<br><br>
+                        This project grew out of a straightforward question: if the government is using
+                        AI to make decisions that affect New Yorkers, what does the public actually
+                        know about it? The answer, as this inventory reveals, is very little. The goal
+                        of this project is to change that, one disclosed system at a time.
+                    </div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-        # ── What It Achieves ────────────────────────────────────────────────
-        with st.expander("What this tool achieves"):
-            col1, col2 = st.columns(2)
-            with col1:
-                st.markdown(
-                    """
-                    <div class="about-text">
-                    <strong style="color:#e2e8f0">Transparency</strong><br>
-                    Converts a raw government dataset into a readable, searchable, and
-                    visual interface that any member of the public can use without technical
-                    knowledge.<br><br>
-                    <strong style="color:#e2e8f0">Accountability</strong><br>
-                    Uses AI analysis to identify surveillance systems, automated decision tools,
-                    biometric technologies, and other high-risk deployments that may affect
-                    civil liberties without adequate public oversight.
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-            with col2:
-                st.markdown(
-                    """
-                    <div class="about-text">
-                    <strong style="color:#e2e8f0">Gap Analysis</strong><br>
-                    Identifies what is missing from the official inventory. With only 13 of
-                    50+ New York State agencies reporting, this tool asks: what AI systems
-                    are being used that have not been disclosed?<br><br>
-                    <strong style="color:#e2e8f0">Public Education</strong><br>
-                    Contextualizes government AI use within broader national and international
-                    frameworks, helping citizens understand what responsible AI governance
-                    looks like and where New York State falls short.
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
-        # ── Data Source ─────────────────────────────────────────────────────
-        with st.expander("Data source"):
+        with col_b:
             st.markdown(
                 """
-                <div class="about-text">
-                The data powering this tool comes from the official USA Data.gov catalog.<br><br>
-                <strong style="color:#e2e8f0">Dataset:</strong> NYS AI Systems Inventory: Beginning September 2025<br>
-                <strong style="color:#e2e8f0">Publisher:</strong> New York State Office of Information Technology Services (ITS), Chief AI Office<br>
-                <strong style="color:#e2e8f0">Published:</strong> September 2025<br>
-                <strong style="color:#e2e8f0">Update frequency:</strong> Annually<br>
-                <strong style="color:#e2e8f0">Coverage:</strong> All NYS executive agencies reporting AI systems with direct public impact<br>
-                <strong style="color:#e2e8f0">Source URL:</strong>
-                <a href="https://catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025"
-                   style="color:var(--blue);word-break:break-all"
-                   target="_blank">
-                   catalog.data.gov/dataset/nys-ai-systems-inventory-beginning-september-2025
-                </a><br><br>
-                <span style="color:var(--muted);font-size:0.8rem">
-                Note: The dataset is self-reported by agencies and may not capture pilot projects,
-                retired systems, or back-office AI tools. Descriptions are agency-provided and
-                have not been independently verified for technical accuracy.
-                </span>
+                <div class="about-card">
+                    <div class="about-label">Key Numbers</div>
+                    <div class="about-text">
+                        <span style="color:#0f172a;font-weight:600">19</span> AI systems disclosed<br>
+                        <span style="color:#0f172a;font-weight:600">13</span> of 50+ agencies reporting<br>
+                        <span style="color:#0f172a;font-weight:600">7</span> systems with surveillance or biometric flags<br>
+                        <span style="color:#0f172a;font-weight:600">4</span> systems with automated decision components<br>
+                        <span style="color:#d97706;font-weight:600">0</span> agencies from criminal justice<br>
+                        <span style="color:#d97706;font-weight:600">0</span> predictive policing or benefits-scoring tools
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-label">What This Tool Achieves</div>
+                    <div class="about-text">
+                        NY AI Systems Watch converts a raw government dataset into a readable,
+                        searchable, and visual interface that any member of the public can use
+                        without technical knowledge.<br><br>
+                        It uses AI to analyze AI: each disclosed system is evaluated for risk,
+                        affected populations, and civil liberties concerns. The gap analysis
+                        identifies what agencies and AI categories are absent from the inventory,
+                        and generates pointed questions for New York State lawmakers.
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-label">Further Reading</div>
+                    <div class="about-text">
+                        AI Now Institute — Annual AI Index Report<br>
+                        ACLU — AI and Civil Liberties<br>
+                        The Markup — Government AI Coverage<br>
+                        Electronic Frontier Foundation<br>
+                        NYS Executive Order on AI (2023)<br>
+                        EU AI Act — Risk Classification Framework<br>
+                        NIST AI Risk Management Framework
+                    </div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-        # ── Data at a Glance ────────────────────────────────────────────────
-        with st.expander("The data at a glance"):
-            st.markdown('<div class="section-label" style="margin-top:0.5rem">Capability Breakdown</div>', unsafe_allow_html=True)
-            st.plotly_chart(capability_chart(), use_container_width=True, config={"displayModeBar": False})
-
-            col_v1, col_v2, col_v3, col_v4 = st.columns(4)
+        st.markdown(
+            '<div class="section-label" style="margin-top:2rem">The Data Visualized</div>',
+            unsafe_allow_html=True,
+        )
+        col_v1, col_v2 = st.columns([3, 2], gap="large")
+        with col_v1:
+            st.plotly_chart(
+                capability_chart(),
+                use_container_width=True,
+                config={"displayModeBar": False},
+                key="cap_chart_about",
+            )
+        with col_v2:
+            st.plotly_chart(
+                vendor_donut(),
+                use_container_width=True,
+                config={"displayModeBar": False},
+                key="vendor_chart_about",
+            )
             flagged_count = sum(1 for s in INVENTORY if s.get("flag"))
-            with col_v1:
-                st.markdown(
-                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);padding:1rem">'
-                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">Systems Disclosed</div>'
-                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:#fff">19</div></div>',
-                    unsafe_allow_html=True,
-                )
-            with col_v2:
-                st.markdown(
-                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:1rem">'
-                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">Agencies Reporting</div>'
-                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:#fff">13</div></div>',
-                    unsafe_allow_html=True,
-                )
-            with col_v3:
-                st.markdown(
-                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);padding:1rem">'
-                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">High-Attention Flags</div>'
-                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--amber)">{flagged_count}</div></div>',
-                    unsafe_allow_html=True,
-                )
-            with col_v4:
-                st.markdown(
-                    f'<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);padding:1rem">'
-                    f'<div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase">Agencies Silent</div>'
-                    f'<div style="font-family:var(--mono);font-size:2rem;font-weight:700;color:var(--red)">37+</div></div>',
-                    unsafe_allow_html=True,
-                )
-
             st.markdown(
-                """
-                <div style="background:var(--surface);border:1px solid var(--border);
-                    border-left:3px solid var(--amber);padding:1rem 1.2rem;margin-top:1rem">
-                    <div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);
-                        letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem">
-                        Notable Absences from the Inventory
+                f"""
+                <div style="background:#fffbeb;border:1px solid #fcd34d;border-left:3px solid #d97706;
+                    padding:0.9rem 1.1rem;margin-top:0.5rem;border-radius:4px">
+                    <div style="font-family:'Space Mono',monospace;font-size:0.58rem;color:#92400e;
+                        letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.3rem">
+                        Notable Absences
                     </div>
-                    <div style="font-size:0.84rem;color:#aaa;line-height:1.75">
-                        0 agencies from criminal justice (State Police, Corrections, Parole)<br>
-                        0 predictive policing or recidivism scoring tools disclosed<br>
-                        0 benefits-screening or fraud-detection AI disclosed (OTDA, OMIG excluded)<br>
-                        0 child welfare or family services AI disclosed (OCFS)
+                    <div style="font-size:0.82rem;color:#374151;line-height:1.75">
+                        0 criminal justice agencies reporting<br>
+                        0 predictive policing tools disclosed<br>
+                        0 benefits screening AI disclosed<br>
+                        0 child welfare AI disclosed
                     </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        # ── Methodology ─────────────────────────────────────────────────────
-        with st.expander("Methodology"):
-            st.markdown(
-                """
-                <div class="about-text">
-                NY AI Systems Watch uses Claude (Anthropic) to perform two types of analysis.<br><br>
-                <strong style="color:#e2e8f0">Ethics Audit</strong> evaluates each AI system against established civil liberties
-                and accountability frameworks, including the EU AI Act risk tier classification,
-                the NIST AI Risk Management Framework, and principles developed by the ACLU for
-                evaluating government AI. Each system receives a risk score, an affected populations
-                assessment, and a list of accountability questions the agency has not publicly answered.<br><br>
-                <strong style="color:#e2e8f0">Accountability Gap Analysis</strong> compares the disclosed inventory against
-                Claude's knowledge of AI systems commonly deployed in government contexts nationally.
-                It identifies agencies likely using public-facing AI that did not report, categories
-                of AI conspicuously absent from the inventory, and structural weaknesses in how the
-                inventory was designed.<br><br>
-                <span style="color:var(--muted);font-size:0.82rem">
-                All AI-generated analysis is produced at runtime and may contain inaccuracies.
-                The purpose is to surface accountability questions, not to render legal or
-                policy conclusions. Users should verify findings independently before citing them.
-                </span>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        # ── About the Researcher ────────────────────────────────────────────
-        with st.expander("About the researcher"):
-            col_bio, col_goals = st.columns([2, 1], gap="large")
-            with col_bio:
-                st.markdown(
-                    """
-                    <div class="about-text">
-                    <strong style="color:#e2e8f0;font-size:1rem">Anna Ebisike</strong><br>
-                    <span style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);
-                        letter-spacing:0.1em;text-transform:uppercase">
-                        Digital Humanities Researcher
-                    </span><br><br>
-                    NY AI Systems Watch was developed by Anna Ebisike as a final project in a
-                    Digital Humanities course focused on coding with AI. Anna's work sits at
-                    the intersection of technology, public policy, and civic accountability,
-                    exploring how AI tools can be used to make government more transparent
-                    and understandable to everyday people.<br><br>
-                    This project grew out of a simple question: if the government is using AI
-                    to make decisions that affect New Yorkers, what does the public actually
-                    know about it? The answer, as this inventory reveals, is: very little.
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-            with col_goals:
-                st.markdown(
-                    """
-                    <div style="background:var(--surface);border:1px solid var(--border);
-                        border-left:3px solid var(--blue);padding:1rem 1.2rem">
-                        <div style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);
-                            letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem">
-                            Project Goals
-                        </div>
-                        <div style="font-size:0.82rem;color:#aaa;line-height:1.8">
-                            Make government AI visible<br>
-                            Surface accountability gaps<br>
-                            Ask questions agencies avoid<br>
-                            Connect data to civil rights<br>
-                            Build tools for civic education
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
-        # ── Further Reading ──────────────────────────────────────────────────
-        with st.expander("Further reading"):
-            st.markdown(
-                """
-                <div class="about-text">
-                AI Now Institute — Annual AI Index Report<br>
-                ACLU — AI and Civil Liberties Resource Center<br>
-                The Markup — Government AI Coverage<br>
-                Electronic Frontier Foundation — Surveillance Self-Defense<br>
-                NYS Executive Order on AI (2023)<br>
-                EU AI Act — Risk Classification Framework<br>
-                NIST AI Risk Management Framework
                 </div>
                 """,
                 unsafe_allow_html=True,
